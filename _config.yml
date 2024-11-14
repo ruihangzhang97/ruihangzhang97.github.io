@@ -649,3 +649,7 @@ jsonresume:
   - languages
   - interests
   - references
+
+exclude:
+  - "*.ipynb"
+  - "*.ipynb_checkpoints"
