@@ -6,17 +6,23 @@ subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: RuihangZhang_ProfilePic.JPG
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+    <p>ruihang.zhang@mail.utoronto.ca</p>
+    <p>647-309-1118</p>
+    <p>Toronto, Canada</p>
 
 news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
-social: true # includes social icons at the bottom of the page
+social: false # includes social icons at the bottom of the page
 ---
+I am a third year Engineering Science student at the University of Toronto, specializing in the Machine Intelligence option.
+
+currently supervised by Professor Roger Grosse as a research assistant at the University of Toronto and a project collaborator at the Vector Institute. I have also worked under the supervision of Professors Konstantinos Plataniotis and Mahdi Hosseini , and I spent one year as an intern at Huawei Canada, supervised by Dr. Amir Rasouli.
+
+I am primarily interested in machine learning (ML) research, with a focus on ML robustness, trustworthiness, and interpretability. My research experience covers specific applications in autonomous driving and large language models (LLMs). Currently, I am exploring AI safety in LLMs and training data attributions.
+
 
 Random text....
 
