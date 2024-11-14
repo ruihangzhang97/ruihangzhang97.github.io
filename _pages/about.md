@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: <a href='#'>Affiliations</a>.
 
 profile:
   align: right
@@ -11,7 +11,6 @@ profile:
   more_info: >
     <p>ruihang.zhang@mail.utoronto.ca</p>
     <p>647-309-1118</p>
-    <p>Toronto, Canada</p>
 
 news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
