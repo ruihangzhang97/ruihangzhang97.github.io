@@ -96,19 +96,13 @@ h2 {
   font-size: 22px;
 }
 
-/* .papertitle {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-} */
-
 .papertitle {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
   font-size: 14px;
   font-weight: 700;
-  white-space: nowrap;  /* Prevents line breaks */
-  width: auto;          /* Allows the text to extend as needed */
-  display: inline-block; /* Keeps the text together */
+  white-space: nowrap; 
+  width: auto;         
+  display: inline-block; 
 }
 
 .name {
