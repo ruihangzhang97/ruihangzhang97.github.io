@@ -2,20 +2,18 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
     <title>Ruihang Zhang</title>
-
     <meta name="author" content="Ruihang Zhang">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="images/favicon/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    
   </head>
 
   <body>
     <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
       <tr style="padding:0px">
         <td style="padding:0px">
+          <!-- Bio Section -->
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
             <tr style="padding:0px">
               <td style="padding:2.5%;width:63%;vertical-align:middle">
@@ -26,12 +24,12 @@
                   👨🏻‍💻 I am an incoming fourth-year <a href="https://engsci.utoronto.ca/program/what-is-engsci/">Engineering Science</a> student at the University of Toronto, where I specialize in the <a href="https://engsci.utoronto.ca/program/majors/machine-intelligence/">Machine Intelligence</a> option.
                 </p>
                 <p>
-                  My academic and research interests broadly span <strong>3D Computer Vision</strong>, <strong>Computer Graphics</strong>, and <strong>Deep Learning</strong>, with a focus on <strong>Digital Humans</strong> and <strong>Human Head Avatar Animation</strong>. My current work as an ML Research Engineer Intern at Noah's Ark Lab focuses on <strong>On-Device Head Swap</strong>. Previously, I was a research intern in the <a href="http://www.modelics.org/">Modelics Lab</a>, with Professor <a href="https://www.ece.utoronto.ca/people/triverio-p/">Piero Triverio</a> and the <a href="https://www.dgp.toronto.edu/">DGP Lab </a>, with <a href="https://felixtaubner.github.io/">Felix Taubner</a> & Professor <a href="https://davidlindell.com/">David Lindell</a>.
+                  My academic and research interests broadly span <strong>3D Computer Vision</strong>, <strong>Computer Graphics</strong>, and <strong>Deep Learning</strong>, with a focus on <strong>Digital Humans</strong> and <strong>Human Head Avatar Animation</strong>. My current work as an ML Research Engineer Intern at Noah's Ark Lab focuses on <strong>On-Device Head Swap</strong>. Previously, I was a research intern in the <a href="http://www.modelics.org/">Modelics Lab</a>, with Professor <a href="https://www.ece.utoronto.ca/people/triverio-p/">Piero Triverio</a> and the <a href="https://www.dgp.toronto.edu/">DGP Lab</a>, with <a href="https://felixtaubner.github.io/">Felix Taubner</a> & Professor <a href="https://davidlindell.com/">David Lindell</a>.
                 </p>
                 <p>
                   👻 <strong>[May 2025]</strong> Joining <strong>Snap Research</strong> in Palo Alto as a Research Intern<br>
                   🔬 <strong>[Sept 2025]</strong> Joining <strong>DGP</strong>/<strong>TCIG</strong> to complete my undergraduate thesis, under the supervision of Felix Taubner & Professor David Lindell
-                 </p>
+                </p>
                 <p style="text-align:center">
                   <a href="mailto:ruihang.zhang@mail.utoronto.ca">Email</a> &nbsp;/&nbsp;
                   <a href="https://scholar.google.com/citations?user=KFx-0xIAAAAJ&hl=en">Scholar</a> &nbsp;/&nbsp;
@@ -43,58 +41,71 @@
               </td>
             </tr>
           </tbody></table>
+
+          <!-- Timeline Section -->
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-              <tr>
+            <tr>
+              <td style="padding:16px;width:100%;vertical-align:middle">
+                <h2>Recent Updates & Bio</h2>
+                <div id="timeline"></div>
+              </td>
+            </tr>
+          </tbody></table>
+
+          <!-- Publications Section -->
+          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+            <tr>
               <td style="padding:16px;width:100%;vertical-align:middle">
                 <h2>Publications</h2>
               </td>
             </tr>
           </tbody></table>
+
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-
-    <tr onmouseout="r2r_stop()" onmouseover="r2r_start()" bgcolor="#ffffd0">
-      <td style="padding:16px;width:20%;vertical-align:middle">
-        <div class="one">
-          <div class="two" id='r2r_image'><video  width=100% muted autoplay loop>
-          <source src="images/cap4d.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-          </video></div>
-          <img src='images/cap4d.png' width=100%>
-        </div>
-        <script type="text/javascript">
-          function r2r_start() {
-            document.getElementById('r2r_image').style.opacity = "1";
-          }
-
-          function r2r_stop() {
-            document.getElementById('r2r_image').style.opacity = "0";
-          }
-          r2r_stop()
-        </script>
-      </td>
-      <td style="padding:8px;width:80%;vertical-align:middle">
-        <a href="https://felixtaubner.github.io/cap4d/">
-          <span class="papertitle">CAP4D: Creating Animatable 4D Portrait Avatars with Morphable Multi-View Diffusion Models</span>
-        </a>
-        <br>
-        <a href="https://hadizayer.github.io/">Felix Taubner</a>,
-				<strong>Ruihang Zhang</strong>, 
-        <a href="https://mathieutuli.com/">Mathieu Tuli</a>,
-        <a href="https://davidlindell.com/">David B. Lindell</a>
-        <br>
-        <em>arXiv</em>, 2024
-        <br>
-        <a href="https://felixtaubner.github.io/cap4d/">Project Page</a>
-        <a href="https://arxiv.org/abs/2412.12093">arXiv</a>
-        <p></p>
-        <p>
-          CAP4D generates controllable 4D human head avatars given any number of reference images using Morphable Multi-view Diffusion Models and Deformable 3D Gaussian Splatting.
-        </p>
-      </td>
-    </tr>
+            <tr onmouseout="r2r_stop()" onmouseover="r2r_start()" bgcolor="#ffffd0">
+              <td style="padding:16px;width:20%;vertical-align:middle">
+                <div class="one">
+                  <div class="two" id='r2r_image'>
+                    <video width=100% muted autoplay loop>
+                      <source src="images/cap4d.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                  <img src='images/cap4d.png' width=100%>
+                </div>
+                <script type="text/javascript">
+                  function r2r_start() {
+                    document.getElementById('r2r_image').style.opacity = "1";
+                  }
+                  function r2r_stop() {
+                    document.getElementById('r2r_image').style.opacity = "0";
+                  }
+                  r2r_stop()
+                </script>
+              </td>
+              <td style="padding:8px;width:80%;vertical-align:middle">
+                <a href="https://felixtaubner.github.io/cap4d/">
+                  <span class="papertitle">CAP4D: Creating Animatable 4D Portrait Avatars with Morphable Multi-View Diffusion Models</span>
+                </a>
+                <br>
+                <a href="https://hadizayer.github.io/">Felix Taubner</a>,
+                <strong>Ruihang Zhang</strong>, 
+                <a href="https://mathieutuli.com/">Mathieu Tuli</a>,
+                <a href="https://davidlindell.com/">David B. Lindell</a>
+                <br>
+                <em>arXiv</em>, 2024
+                <br>
+                <a href="https://felixtaubner.github.io/cap4d/">Project Page</a> /
+                <a href="https://arxiv.org/abs/2412.12093">arXiv</a>
+                <p></p>
+                <p>
+                  CAP4D generates controllable 4D human head avatars given any number of reference images using Morphable Multi-view Diffusion Models and Deformable 3D Gaussian Splatting.
+                </p>
+              </td>
+            </tr>
           </tbody></table>
         </td>
       </tr>
-    </table>
+    </tbody></table>
   </body>
 </html>
