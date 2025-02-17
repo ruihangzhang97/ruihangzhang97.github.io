@@ -18,7 +18,7 @@
             <tr style="padding:0px">
               <td style="padding:2.5%;width:63%;vertical-align:middle">
                 <p class="name" style="text-align: center;">
-                  <span id="typing-text"></span><span class="cursor">|</span>
+                  <span id="typing-text"></span>
                 </p>
                 <p>
                   👨🏻‍💻 I am an incoming fourth-year <a href="https://engsci.utoronto.ca/program/what-is-engsci/">Engineering Science</a> student at the University of Toronto, where I specialize in the <a href="https://engsci.utoronto.ca/program/majors/machine-intelligence/">Machine Intelligence</a> option.
@@ -133,10 +133,6 @@
           if (index < text.length) {
             index++;
             setTimeout(type, 150);
-          } else {
-            setTimeout(() => {
-                cursor.remove(); // Removes the cursor from the DOM
-            }, 500);
           }
         }
 
