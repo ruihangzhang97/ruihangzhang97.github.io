@@ -124,6 +124,7 @@
       document.addEventListener('DOMContentLoaded', function() {
         const text = "Ruihang Zhang";
         const element = document.getElementById('typing-text');
+        const cursor = document.querySelector('.cursor');
         let index = 0;
 
         function type() {
@@ -132,8 +133,8 @@
           if (index < text.length) {
             index++;
             setTimeout(type, 150);
-          }
-          else {
+          } else {
+            // Hide cursor after typing is complete
             cursor.style.display = 'none';
           }
         }
