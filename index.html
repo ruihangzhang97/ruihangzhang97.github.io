@@ -9,28 +9,6 @@
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
   </head>
 
-<!-- <!DOCTYPE HTML>
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Ruihang Zhang</title>
-    <meta name="author" content="Ruihang Zhang">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="images/icon-rz.png" type="image/png">
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    
-    <style>
-      .cursor {
-        animation: blink 1s infinite;
-      }
-
-      @keyframes blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0; }
-      }
-    </style>
-  </head> -->
-
   <body>
     <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
       <tr style="padding:0px">
@@ -154,6 +132,9 @@
           if (index < text.length) {
             index++;
             setTimeout(type, 150);
+          }
+          else {
+            cursor.style.display = 'none';
           }
         }
 
