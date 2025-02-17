@@ -121,23 +121,22 @@
     </tbody></table>
 
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const text = "Ruihang Zhang";
-        const element = document.getElementById('typing-text');
-        const cursor = document.querySelector('.cursor');
-        let index = 0;
+    document.addEventListener('DOMContentLoaded', function() {
+      const text = "Ruihang Zhang";
+      const element = document.getElementById('typing-text');
+      let index = 0;
 
-        function type() {
-          element.textContent = text.slice(0, index);
-          
-          if (index < text.length) {
-            index++;
-            setTimeout(type, 150);
-          }
+      function type() {
+        element.textContent = text.slice(0, index);
+        
+        if (index < text.length) {
+          index++;
+          setTimeout(type, 150);
         }
+      }
 
-        type();
-      });
+      type();
+    });
     </script>
   </body>
 </html>
