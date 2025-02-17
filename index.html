@@ -134,7 +134,9 @@
             index++;
             setTimeout(type, 150);
           } else {
-            cursor.classList.add('hide');
+            setTimeout(() => {
+              cursor.style.display = 'none';
+            }, 500);
           }
         }
 
