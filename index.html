@@ -41,43 +41,32 @@
     <!-- Add the typing effect component script -->
     <script type="text/babel">
       const TypingName = () => {
-        const [text, setText] = React.useState('');
-        const [isBlinking, setIsBlinking] = React.useState(true);
+        const [displayText, setDisplayText] = React.useState('');
+        const [isTypingComplete, setIsTypingComplete] = React.useState(false);
         const fullName = 'Ruihang Zhang';
 
         React.useEffect(() => {
-          let currentIndex = 0;
-          
-          const typingInterval = setInterval(() => {
-            if (currentIndex < fullName.length) {
-              setText(prev => prev + fullName[currentIndex]);
-              currentIndex++;
+          const typeNextCharacter = (index) => {
+            if (index <= fullName.length) {
+              setDisplayText(fullName.slice(0, index));
+              setTimeout(() => typeNextCharacter(index + 1), 150);
             } else {
-              clearInterval(typingInterval);
+              setIsTypingComplete(true);
             }
-          }, 150);
-
-          const blinkInterval = setInterval(() => {
-            setIsBlinking(prev => !prev);
-          }, 530);
-
-          return () => {
-            clearInterval(typingInterval);
-            clearInterval(blinkInterval);
           };
+
+          typeNextCharacter(0);
         }, []);
 
         return (
           <p className="name" style={{ textAlign: 'center' }}>
-            {text}
-            <span 
+            {displayText}
+            {<span 
               style={{
                 marginLeft: '2px',
-                opacity: isBlinking ? 1 : 0,
-                transition: 'opacity 0.1s',
                 animation: 'blink 1s step-end infinite'
               }}
-            >|</span>
+            >|</span>}
           </p>
         );
       };
