@@ -8,6 +8,7 @@
     <link rel="icon" href="images/icon-rz.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
   </head> -->
+
 <!DOCTYPE HTML>
 <html lang="en">
   <head>
@@ -17,24 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/icon-rz.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
-  </head>
-
-  <body>
-    <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-      <tbody>
-        <tr style="padding:0px">
-          <td style="padding:0px">
-            <!-- Typing effect name -->
-            <p class="name" style="text-align: center;">
-              <span id="typing-text"></span><span class="cursor">|</span>
-            </p>
-
-            <!-- Rest of your content -->
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
+    
     <style>
       .cursor {
         animation: blink 1s infinite;
@@ -45,29 +29,7 @@
         50% { opacity: 0; }
       }
     </style>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const text = "Ruihang Zhang";
-        const element = document.getElementById('typing-text');
-        let index = 0;
-
-        function type() {
-          if (index < text.length) {
-            element.textContent += text.charAt(index);
-            index++;
-            setTimeout(type, 150);
-          }
-        }
-
-        type();
-      });
-    </script>
-  </body>
-</html>
-
-
-
+  </head>
 
   <body>
     <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
@@ -78,7 +40,7 @@
             <tr style="padding:0px">
               <td style="padding:2.5%;width:63%;vertical-align:middle">
                 <p class="name" style="text-align: center;">
-                  Ruihang Zhang
+                  <span id="typing-text"></span><span class="cursor">|</span>
                 </p>
                 <p>
                   👨🏻‍💻 I am an incoming fourth-year <a href="https://engsci.utoronto.ca/program/what-is-engsci/">Engineering Science</a> student at the University of Toronto, where I specialize in the <a href="https://engsci.utoronto.ca/program/majors/machine-intelligence/">Machine Intelligence</a> option.
@@ -179,5 +141,24 @@
         </td>
       </tr>
     </tbody></table>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const text = "Ruihang Zhang";
+        const element = document.getElementById('typing-text');
+        let index = 0;
+
+        function type() {
+          element.textContent = text.slice(0, index);
+          
+          if (index < text.length) {
+            index++;
+            setTimeout(type, 150);
+          }
+        }
+
+        type();
+      });
+    </script>
   </body>
 </html>
