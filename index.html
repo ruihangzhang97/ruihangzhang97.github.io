@@ -135,7 +135,7 @@
             setTimeout(type, 150);
           } else {
             setTimeout(() => {
-              cursor.style.display = 'none';
+                cursor.remove(); // Removes the cursor from the DOM
             }, 500);
           }
         }
