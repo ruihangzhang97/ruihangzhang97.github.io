@@ -61,81 +61,80 @@
             </tr>
           </tbody></table>
         
-          <table style="width:100%;max-width:1000px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr onmouseout="r2r_stop()" onmouseover="r2r_start()" bgcolor="#ffffd0">
-              <td style="padding:16px;width:15%;vertical-align:middle">
-                <div class="one">
-                  <div class="two" id='r2r_image'>
-                    <video width=100% muted autoplay loop>
-                      <source src="images/layer-composer.mp4" type="video/mp4">
-                      Your browser does not support the video tag.
-                    </video>
-                  </div>
-                  <img src='images/layercomposer.png' width=100%>
+          <tr bgcolor="#ffffd0">
+            <td style="padding:16px;width:15%;vertical-align:middle">
+              <div class="one" onmouseover="layercomposer_start()" onmouseout="layercomposer_stop()">
+                <div class="two" id="layercomposer_video" style="opacity:0; transition: opacity 0.3s;">
+                  <video width="100%" muted autoplay loop>
+                    <source src="images/layer-composer.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
-                <script type="text/javascript">
-                  function r2r_start() {
-                    document.getElementById('r2r_image').style.opacity = "1";
-                  }
-                  function r2r_stop() {
-                    document.getElementById('r2r_image').style.opacity = "0";
-                  }
-                  r2r_stop()
-                </script>
-              </td>
-              <td style="padding:8px;width:85%;vertical-align:middle">
-                <a href="https://snap-research.github.io/layercomposer/">
-                  <span class="papertitle">LayerComposer: Interactive Personalized T2I via Spatially-Aware Layered Canvas</span>
-                </a>
-                <br>
-                <a href="https://guochengqian.github.io/">Gordon Guocheng Qian</a><sup>*</sup>,
-                <strong>Ruihang Zhang</strong><sup>*</sup>,
-                <a href="https://tsaishien-chen.github.io/">Tsai-Shien Chen</a>,
-                <a href="https://yusufdalva.github.io/">Yusuf Dalva</a>,
-                <a href="https://www.linkedin.com/in/anujraajgoel/">Anujraaj Goyal</a>
-                <a href="https://www.willimenapace.com/">Willi Menapace</a>,
-                <a href="https://skor.sh/">Ivan Skorokhodov</a>,
-                <a href="https://www.linkedin.com/in/danostashev/?originalSubdomain=uk">Daniil Ostashev</a>
-                <a href="https://www.linkedin.com/in/meng-dong-744a69129/">Meng Dong</a>,
-                <a href="https://www.linkedin.com/in/arpitsah/">Arpit Sahni</a>,
-                <a href="https://www.linkedin.com/in/erichuju/">Ju Hu</a>
-                <a href="https://stulyakov.com/">Sergey Tulyakov</a>,
-                <a href="https://wangkua1.github.io/">Kuan-Chieh Jackson Wang</a>,
-                <br>
-                <small><strong><sup>*</sup>Equal Contribution, Co-First Authors</strong></small>
-                <br>
-                <em>Preprint</em>, 2025 
-                <br>
-                <a href="https://snap-research.github.io/layercomposer/">Project Page</a> /
-                <a href="https://ruihangzhang97.github.io/">arXiv</a>
-                <p></p>
-                <p>
-                  LayerComposer enables Photoshop-like control for multi-subject text-to-image generation, allowing users to compose scenes by placing, resizing, and locking elements in a layered canvas with high fidelity.
-                </p>
-              </td>
-            </tr>
+                <img src="images/layercomposer.png" width="100%">
+              </div>
+              <script type="text/javascript">
+                function layercomposer_start() {
+                  document.getElementById('layercomposer_video').style.opacity = "1";
+                }
+                function layercomposer_stop() {
+                  document.getElementById('layercomposer_video').style.opacity = "0";
+                }
+                layercomposer_stop();
+              </script>
+            </td>
+            <td style="padding:8px;width:85%;vertical-align:middle">
+              <a href="https://snap-research.github.io/layercomposer/">
+                <span class="papertitle">LayerComposer: Interactive Personalized T2I via Spatially-Aware Layered Canvas</span>
+              </a>
+              <br>
+              <a href="https://guochengqian.github.io/">Gordon Guocheng Qian</a><sup>*</sup>,
+              <strong>Ruihang Zhang</strong><sup>*</sup>,
+              <a href="https://tsaishien-chen.github.io/">Tsai-Shien Chen</a>,
+              <a href="https://yusufdalva.github.io/">Yusuf Dalva</a>,
+              <a href="https://www.linkedin.com/in/anujraajgoel/">Anujraaj Goyal</a>,
+              <a href="https://www.willimenapace.com/">Willi Menapace</a>,
+              <a href="https://skor.sh/">Ivan Skorokhodov</a>,
+              <a href="https://www.linkedin.com/in/danostashev/?originalSubdomain=uk">Daniil Ostashev</a>,
+              <a href="https://www.linkedin.com/in/meng-dong-744a69129/">Meng Dong</a>,
+              <a href="https://www.linkedin.com/in/arpitsah/">Arpit Sahni</a>,
+              <a href="https://www.linkedin.com/in/erichuju/">Ju Hu</a>,
+              <a href="https://stulyakov.com/">Sergey Tulyakov</a>,
+              <a href="https://wangkua1.github.io/">Kuan-Chieh Jackson Wang</a>,
+              <br>
+              <small><strong><sup>*</sup>Equal Contribution, Co-First Authors</strong></small>
+              <br>
+              <em>Preprint</em>, 2025 
+              <br>
+              <a href="https://snap-research.github.io/layercomposer/">Project Page</a> /
+              <a href="https://ruihangzhang97.github.io/">arXiv</a>
+              <p></p>
+              <p>
+                LayerComposer enables Photoshop-like control for multi-subject text-to-image generation, allowing users to compose scenes by placing, resizing, and locking elements in a layered canvas with high fidelity.
+              </p>
+            </td>
+          </tr>
           </tbody></table>
 
           <table style="width:100%;max-width:1000px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr onmouseout="r2r_stop()" onmouseover="r2r_start()" bgcolor="#ffffd0">
+            <tr bgcolor="#ffffd0">
               <td style="padding:16px;width:15%;vertical-align:middle">
-                <div class="one">
-                  <div class="two" id='r2r_image'>
-                    <video width=100% muted autoplay loop>
+                <div class="one" onmouseover="cap4d_start()" onmouseout="cap4d_stop()">
+                  <div class="two" id="cap4d_video" style="opacity:0; transition: opacity 0.3s;">
+                    <video width="100%" muted autoplay loop>
                       <source src="images/cap4d.mp4" type="video/mp4">
                       Your browser does not support the video tag.
                     </video>
                   </div>
-                  <img src='images/cap4d-picture.png' width=100%>
+                  <img src="images/cap4d-picture.png" width="100%">
                 </div>
                 <script type="text/javascript">
-                  function r2r_start() {
-                    document.getElementById('r2r_image').style.opacity = "1";
+                  function cap4d_start() {
+                    document.getElementById('cap4d_video').style.opacity = "1";
                   }
-                  function r2r_stop() {
-                    document.getElementById('r2r_image').style.opacity = "0";
+                  function cap4d_stop() {
+                    document.getElementById('cap4d_video').style.opacity = "0";
                   }
-                  r2r_stop()
+                  cap4d_stop();
                 </script>
               </td>
               <td style="padding:8px;width:85%;vertical-align:middle">
@@ -144,7 +143,7 @@
                 </a>
                 <br>
                 <a href="https://felixtaubner.github.io/">Felix Taubner</a>,
-                <strong>Ruihang Zhang</strong>, 
+                Ruihang Zhang, 
                 <a href="https://mathieutuli.com/">Mathieu Tuli</a>,
                 <a href="https://davidlindell.com/">David B. Lindell</a>
                 <br>
@@ -161,47 +160,47 @@
           </tbody></table>
 
           <table style="width:100%;max-width:1000px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr onmouseout="r2r_stop()" onmouseover="r2r_start()">
+            <tr>
               <td style="padding:16px;width:15%;vertical-align:middle">
-                <div class="one">
-                  <div class="two" id='r2r_image'>
-                    <video width=100% muted autoplay loop>
-                      <source src="images/mvp4d.mp4" type="video/mp4">
-                      Your browser does not support the video tag.
-                    </video>
+                  <div class="one" onmouseover="mvp4d_start()" onmouseout="mvp4d_stop()">
+                    <div class="two" id="mvp4d_video" style="opacity:0; transition: opacity 0.3s;">
+                      <video width="100%" muted autoplay loop>
+                        <source src="images/mvp4d.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                    <img src="images/mvp4d.png" width="100%">
                   </div>
-                  <img src='images/mvp4d.png' width=100%>
-                </div>
-                <script type="text/javascript">
-                  function r2r_start() {
-                    document.getElementById('r2r_image').style.opacity = "1";
-                  }
-                  function r2r_stop() {
-                    document.getElementById('r2r_image').style.opacity = "0";
-                  }
-                  r2r_stop()
-                </script>
-              </td>
-              <td style="padding:8px;width:85%;vertical-align:middle">
-                <a href="https://ruihangzhang97.github.io/">
-                  <span class="papertitle">MVP4D: Multi-View Portrait Video Diffusion for Animatable 4D Avatarsffusion Models</span>
-                </a>
-                <br>
-                <a href="https://felixtaubner.github.io/">Felix Taubner</a>,
-                <strong>Ruihang Zhang</strong>, 
-                <a href="https://mathieutuli.com/">Mathieu Tuli</a>,
-                <a href="https://sherwinbahmani.github.io/">Sherwin Bahmani</a>,
-                <a href="https://davidlindell.com/">David B. Lindell</a>
-                <br>
-                <em>SIGGRAPH ASIA</em>, 2025 
-                <br>
-                <a href="https://ruihangzhang97.github.io/">Project Page</a> /
-                <a href="https://ruihangzhang97.github.io/">arXiv</a>
-                <p></p>
-                <p>
-                  MVP4D generates 360° human heads from a reference image and input animation using a Morphable Multi-View Video Diffusion Model, distilling them into a 4D representation for real-time rendering.
-                </p>
-              </td>
+                  <script type="text/javascript">
+                    function mvp4d_start() {
+                      document.getElementById('mvp4d_video').style.opacity = "1";
+                    }
+                    function mvp4d_stop() {
+                      document.getElementById('mvp4d_video').style.opacity = "0";
+                    }
+                    mvp4d_stop();
+                  </script>
+                </td>
+                <td style="padding:8px;width:85%;vertical-align:middle">
+                  <a href="https://ruihangzhang97.github.io/">
+                    <span class="papertitle">MVP4D: Multi-View Portrait Video Diffusion for Animatable 4D Avatars Diffusion Models</span>
+                  </a>
+                  <br>
+                  <a href="https://felixtaubner.github.io/">Felix Taubner</a>,
+                  Ruihang Zhang, 
+                  <a href="https://mathieutuli.com/">Mathieu Tuli</a>,
+                  <a href="https://sherwinbahmani.github.io/">Sherwin Bahmani</a>,
+                  <a href="https://davidlindell.com/">David B. Lindell</a>
+                  <br>
+                  <em>SIGGRAPH ASIA</em>, 2025 
+                  <br>
+                  <a href="https://ruihangzhang97.github.io/">Project Page</a> /
+                  <a href="https://ruihangzhang97.github.io/">arXiv</a>
+                  <p></p>
+                  <p>
+                    MVP4D generates 360° human heads from a reference image and input animation using a Morphable Multi-View Video Diffusion Model, distilling them into a 4D representation for real-time rendering.
+                  </p>
+                </td>
             </tr>
           </tbody></table>
 
