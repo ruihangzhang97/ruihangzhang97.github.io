@@ -146,10 +146,15 @@ span.highlight {
 
 .pfp {
   width: 100%;
-  max-width: 100%;
+  max-width: 420px;   /* increase this to make the picture larger on wide screens */
+  height: auto;
   object-fit: cover;
-  border-radius: 12px; /* curved rectangle; increase for rounder corners */
+  border-radius: 14px; /* curved rectangle */
   overflow: hidden;
   display: block;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  transition: transform 0.15s ease;
+}
+.pfp:hover {
+  transform: translateY(-3px);
 }
