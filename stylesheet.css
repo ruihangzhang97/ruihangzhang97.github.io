@@ -143,3 +143,13 @@ span.highlight {
     display: inline-block;
     border-radius: 10px;
 }
+
+.pfp {
+  width: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 12px; /* curved rectangle; increase for rounder corners */
+  overflow: hidden;
+  display: block;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
