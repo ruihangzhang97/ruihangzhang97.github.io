@@ -146,7 +146,7 @@ span.highlight {
 
 .pfp {
   width: 100%;
-  max-width: 520px;   /* increase this to make the picture larger on wide screens */
+  max-width: 820px;   /* increase this to make the picture larger on wide screens */
   height: auto;
   object-fit: cover;
   border-radius: 14px; /* curved rectangle */
