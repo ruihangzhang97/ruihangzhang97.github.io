@@ -309,3 +309,9 @@ h2{
     font-size: 32px;
   }
 }
+
+.hero-right{
+  display: flex;
+  justify-content: center;
+  margin-top: 8px; /* tweak: 6–16px */
+}
