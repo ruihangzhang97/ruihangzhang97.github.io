@@ -355,15 +355,14 @@ h2{
 .exp-logo{
   width: 84px;
   height: 84px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.12);
-  overflow: hidden;
-  background: rgba(0,0,0,0.25);
   display: grid;
   place-items: center;
+  overflow: visible;
+  background: none;
+  border: none;
+  border-radius: 0;
   flex-shrink: 0;
 }
-
 .exp-logo img{
   max-width: 100%;
   max-height: 100%;
