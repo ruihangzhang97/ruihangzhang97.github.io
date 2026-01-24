@@ -307,30 +307,6 @@
         }
       }
       type();
-    });
-
-    // video hover helper
-    function hoverVideo(id, on) {
-      const v = document.getElementById(id);
-      if (!v) return;
-      v.style.opacity = on ? "1" : "0";
-    }
-  </script>
-  <script>
-    // typing
-    document.addEventListener('DOMContentLoaded', function() {
-      const text = "Ruihang Zhang";
-      const el = document.getElementById('typing-text');
-      let i = 0;
-
-      function type() {
-        el.textContent = text.slice(0, i);
-        if (i < text.length) {
-          i++;
-          setTimeout(type, 80);
-        }
-      }
-      type();
 
       // init experience dragbar gallery
       initDragbarGallery({
