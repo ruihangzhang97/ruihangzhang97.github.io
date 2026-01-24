@@ -57,6 +57,76 @@
       </div>
     </header>
 
+
+    <!-- SECTION: Experience (Dragbar Gallery) -->
+    <section class="section">
+      <div class="section-header">
+        <h2>Experience</h2>
+      </div>
+
+      <div class="dragbar-gallery" id="expGallery">
+        <div class="dragbar-track" id="expTrack" aria-label="Experience gallery">
+          <!-- Card 1 -->
+          <article class="exp-card">
+            <div class="exp-logo placeholder-logo" aria-hidden="true"></div>
+            <div class="exp-body">
+              <div class="exp-title">Company / Lab Name</div>
+              <div class="exp-role">Role Title</div>
+              <div class="exp-dates">Sep 20XX – May 20XX</div>
+              <p class="exp-desc">
+                Placeholder summary of what you did. 1–2 lines is ideal for this layout.
+              </p>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="exp-card">
+            <div class="exp-logo placeholder-logo" aria-hidden="true"></div>
+            <div class="exp-body">
+              <div class="exp-title">Company / Lab Name</div>
+              <div class="exp-role">Role Title</div>
+              <div class="exp-dates">Sep 20XX – May 20XX</div>
+              <p class="exp-desc">
+                Placeholder summary of impact, methods, or systems you worked with.
+              </p>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="exp-card">
+            <div class="exp-logo placeholder-logo" aria-hidden="true"></div>
+            <div class="exp-body">
+              <div class="exp-title">Company / Lab Name</div>
+              <div class="exp-role">Role Title</div>
+              <div class="exp-dates">Sep 20XX – May 20XX</div>
+              <p class="exp-desc">
+                Placeholder summary. Mention 1 highlight (e.g., “built X”, “shipped Y”).
+              </p>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="exp-card">
+            <div class="exp-logo placeholder-logo" aria-hidden="true"></div>
+            <div class="exp-body">
+              <div class="exp-title">Company / Lab Name</div>
+              <div class="exp-role">Role Title</div>
+              <div class="exp-dates">Sep 20XX – May 20XX</div>
+              <p class="exp-desc">
+                Placeholder summary of a project + a measurable result if you want.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Dragbar -->
+        <div class="dragbar" aria-hidden="true">
+          <div class="dragbar-thumb" id="expThumb"></div>
+        </div>
+      </div>
+    </section>
+
+
     <!-- SECTION: Publications -->
     <section class="section">
       <div class="section-header">
@@ -237,5 +307,171 @@
       v.style.opacity = on ? "1" : "0";
     }
   </script>
+  <script>
+    // typing
+    document.addEventListener('DOMContentLoaded', function() {
+      const text = "Ruihang Zhang";
+      const el = document.getElementById('typing-text');
+      let i = 0;
+
+      function type() {
+        el.textContent = text.slice(0, i);
+        if (i < text.length) {
+          i++;
+          setTimeout(type, 80);
+        }
+      }
+      type();
+
+      // init experience dragbar gallery
+      initDragbarGallery({
+        trackId: "expTrack",
+        thumbId: "expThumb",
+        containerId: "expGallery"
+      });
+    });
+
+    // video hover helper
+    function hoverVideo(id, on) {
+      const v = document.getElementById(id);
+      if (!v) return;
+      v.style.opacity = on ? "1" : "0";
+    }
+
+    // ===== Dragbar Gallery (track drag + thumb drag) =====
+    function initDragbarGallery({ trackId, thumbId, containerId }) {
+      const track = document.getElementById(trackId);
+      const thumb = document.getElementById(thumbId);
+      const container = document.getElementById(containerId);
+      if (!track || !thumb || !container) return;
+
+      const bar = thumb.parentElement;
+
+      // --- Helpers: sync thumb with track scroll ---
+      function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+      function updateThumbSizeAndPos() {
+        const visible = track.clientWidth;
+        const total = track.scrollWidth;
+        const barW = bar.clientWidth;
+
+        // if no overflow, thumb fills bar
+        if (total <= visible + 1) {
+          thumb.style.width = barW + "px";
+          thumb.style.left = "0px";
+          return;
+        }
+
+        // thumb size proportional to visible/total
+        const minThumb = 46;
+        const thumbW = clamp(Math.round((visible / total) * barW), minThumb, barW);
+        thumb.style.width = thumbW + "px";
+
+        const maxScroll = total - visible;
+        const maxLeft = barW - thumbW;
+        const left = (track.scrollLeft / maxScroll) * maxLeft;
+        thumb.style.left = clamp(left, 0, maxLeft) + "px";
+      }
+
+      // Keep thumb synced
+      track.addEventListener("scroll", updateThumbSizeAndPos, { passive: true });
+      window.addEventListener("resize", updateThumbSizeAndPos);
+      updateThumbSizeAndPos();
+
+      // --- 1) Drag-to-scroll on the track (mouse) ---
+      let isDown = false;
+      let startX = 0;
+      let startScrollLeft = 0;
+
+      track.addEventListener("mousedown", (e) => {
+        isDown = true;
+        track.classList.add("is-dragging");
+        startX = e.pageX;
+        startScrollLeft = track.scrollLeft;
+      });
+
+      window.addEventListener("mouseup", () => {
+        isDown = false;
+        track.classList.remove("is-dragging");
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        const dx = e.pageX - startX;
+        track.scrollLeft = startScrollLeft - dx;
+      });
+
+      // --- 1b) Drag-to-scroll on the track (touch) ---
+      let touchStartX = 0;
+      let touchStartScroll = 0;
+
+      track.addEventListener("touchstart", (e) => {
+        if (!e.touches || e.touches.length !== 1) return;
+        touchStartX = e.touches[0].pageX;
+        touchStartScroll = track.scrollLeft;
+      }, { passive: true });
+
+      track.addEventListener("touchmove", (e) => {
+        if (!e.touches || e.touches.length !== 1) return;
+        const dx = e.touches[0].pageX - touchStartX;
+        track.scrollLeft = touchStartScroll - dx;
+      }, { passive: true });
+
+      // --- 2) Drag the thumb to scroll ---
+      let thumbDragging = false;
+      let thumbStartX = 0;
+      let thumbStartLeft = 0;
+
+      thumb.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        thumbDragging = true;
+        thumbStartX = e.pageX;
+        thumbStartLeft = parseFloat(getComputedStyle(thumb).left) || 0;
+      });
+
+      window.addEventListener("mouseup", () => { thumbDragging = false; });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!thumbDragging) return;
+
+        const barW = bar.clientWidth;
+        const thumbW = thumb.clientWidth;
+
+        const maxLeft = barW - thumbW;
+        const newLeft = clamp(thumbStartLeft + (e.pageX - thumbStartX), 0, maxLeft);
+
+        // Map thumb position -> scrollLeft
+        const visible = track.clientWidth;
+        const total = track.scrollWidth;
+        const maxScroll = Math.max(1, total - visible);
+        const ratio = newLeft / Math.max(1, maxLeft);
+
+        track.scrollLeft = ratio * maxScroll;
+      });
+
+      // --- 3) Click on bar to jump ---
+      bar.addEventListener("mousedown", (e) => {
+        // If clicking thumb itself, let thumb drag handler run
+        if (e.target === thumb) return;
+
+        const rect = bar.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+
+        const barW = bar.clientWidth;
+        const thumbW = thumb.clientWidth;
+        const maxLeft = barW - thumbW;
+
+        const targetLeft = clamp(x - thumbW / 2, 0, maxLeft);
+
+        const visible = track.clientWidth;
+        const total = track.scrollWidth;
+        const maxScroll = Math.max(1, total - visible);
+        const ratio = targetLeft / Math.max(1, maxLeft);
+
+        track.scrollLeft = ratio * maxScroll;
+      });
+    }
+  </script>
+
 </body>
 </html>

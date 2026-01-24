@@ -309,3 +309,113 @@ h2{
     font-size: 32px;
   }
 }
+
+/* ================================
+   Experience Dragbar Gallery
+================================ */
+.dragbar-gallery{
+  margin-top: 12px;
+}
+
+/* Horizontal scroll track */
+.dragbar-track{
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding: 10px 8px 14px 8px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  user-select: none;
+
+  /* hide default scrollbar */
+  scrollbar-width: none;          /* Firefox */
+}
+.dragbar-track::-webkit-scrollbar{ display: none; } /* Chrome/Safari */
+
+.dragbar-track.is-dragging{
+  cursor: grabbing;
+}
+
+/* Experience card */
+.exp-card{
+  flex: 0 0 auto;
+  width: min(520px, 86vw);
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  align-items: center;
+  gap: 16px;
+
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 18px;
+  padding: 18px 18px;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.25);
+}
+
+.exp-logo{
+  width: 84px;
+  height: 84px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.12);
+  overflow: hidden;
+}
+
+/* Placeholder “image” */
+.placeholder-logo{
+  background:
+    radial-gradient(120px 120px at 30% 25%, rgba(138,180,255,0.35), transparent 55%),
+    radial-gradient(110px 110px at 75% 75%, rgba(255,204,102,0.25), transparent 60%),
+    rgba(255,255,255,0.06);
+}
+
+.exp-title{
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.2;
+  color: rgba(255,255,255,0.92);
+}
+.exp-role{
+  margin-top: 4px;
+  font-size: 15px;
+  color: rgba(255,255,255,0.78);
+}
+.exp-dates{
+  margin-top: 6px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.60);
+}
+.exp-desc{
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.72);
+}
+
+/* Dragbar */
+.dragbar{
+  height: 10px;
+  margin: 8px 8px 0 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.10);
+  position: relative;
+}
+
+.dragbar-thumb{
+  height: 100%;
+  width: 64px; /* will be resized by JS */
+  border-radius: 999px;
+  background: rgba(255,255,255,0.22);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: grab;
+}
+
+/* Slight hover polish */
+.exp-card:hover{
+  border-color: rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.075);
+}
+.dragbar-thumb:active{ cursor: grabbing; }
