@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Wanting Mao — 毛婉婷 | PhD Student @ UIUC</title>
-  <meta name="description" content="Wanting Mao (毛婉婷), PhD student in Computer Science at UIUC. Research in AI for healthcare, time-series foundation models, self-supervised learning. Publications, projects, and contact." />
+  <title>Ruihang Zhang | University of Toronto</title>
+  <meta name="description" content="Ruihang Zhang, Engineering Science graduate at the University of Toronto. Research in controllable generative models and video generation &amp; editing." />
+  <link rel="icon" type="image/png" href="img/favicon.png">
   <style>
     :root{
       --bg: #ffffff;
@@ -22,20 +23,44 @@
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; background: var(--bg); color: var(--text); }
     body{
-      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, "Helvetica Neue", Arial;
-      line-height:1.6; color:var(--text); background:var(--bg);
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, "Helvetica Neue", Arial;
+      line-height:1.6;
+      color:var(--text);
+      background:var(--bg);
     }
     a{ color:var(--accent); text-decoration: none; }
     a:hover{ text-decoration: underline; }
     .container{ max-width: 960px; margin: 0 auto; padding: 24px; }
-    header{ position: sticky; top:0; z-index:20; backdrop-filter: saturate(180%) blur(6px); background: rgba(255,255,255,0.9); border-bottom:1px solid var(--border); }
-    nav{ display:flex; align-items:center; gap:18px; padding: 10px 24px; max-width: 960px; margin: 0 auto; }
+
+    header{
+      position: sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter: saturate(180%) blur(6px);
+      background: rgba(255,255,255,0.9);
+      border-bottom:1px solid var(--border);
+    }
+    nav{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      padding: 10px 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
     nav .brand{ font-weight: 800; letter-spacing:.2px; }
     nav .spacer{ flex:1; }
     nav .link{ color:var(--muted); font-weight:600; }
     nav .link:hover{ color:var(--accent); text-decoration:none; }
 
-    .hero{ padding: 48px 0 12px; display:grid; grid-template-columns: 120px 1fr; gap:20px; align-items:center; }
+    .hero{
+      padding: 48px 0 12px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 32px;
+      align-items: center;
+    }
     .avatar {
       width: 200px;
       height: 200px;
@@ -43,25 +68,34 @@
       object-fit: cover;
       border: 1px solid var(--border);
     }
-    .hero {
-      padding: 48px 0 12px;
-      display: grid;
-      grid-template-columns: 200px 1fr; /* 左边200px头像，右边内容 */
-      gap: 32px; /* 左右间距稍大些 */
-      align-items: center;
-    }
-    .hero h1{ margin:0; font-size: 28px; }
+    .hero h1{ margin:0; font-size: 30px; }
     .sub{ color:var(--muted); margin:6px 0 12px; }
     .chiprow{ display:flex; flex-wrap:wrap; gap:8px; margin: 8px 0 16px; }
-    .chip{ display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:var(--chip); color:var(--chip-text); font-weight:600; font-size: 13px; border: 1px solid var(--border); }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:var(--chip);
+      color:var(--chip-text);
+      font-weight:600;
+      font-size: 13px;
+      border: 1px solid var(--border);
+    }
 
     .actions{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
-    .btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid var(--border); background: var(--card); color:var(--text); font-weight:700; }
-    .btn.primary{ background: var(--accent); color:white; border-color: var(--accent-2); }
-
-    /* Icon buttons */
     .iconbar{ display:flex; gap:10px; align-items:center; }
-    .iconbtn{ display:inline-flex; width:40px; height:40px; border-radius:999px; border:1px solid var(--border); background:var(--card); align-items:center; justify-content:center; }
+    .iconbtn{
+      display:inline-flex;
+      width:40px;
+      height:40px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--card);
+      align-items:center;
+      justify-content:center;
+    }
     .iconbtn:hover{ filter: brightness(1.05); text-decoration:none; }
     .icon{ width:22px; height:22px; display:block; }
 
@@ -69,57 +103,75 @@
     section h2{ margin:0 0 10px; font-size:20px; }
     .card{ background: var(--card); border:1px solid var(--border); border-radius:16px; padding:16px; }
     .list{ display:flex; flex-direction:column; gap:16px; }
-    .pub .title{ font-weight:700; }
+    .pub .title{ font-weight:700; font-size: 1.03em; }
     .pub .meta{ color:var(--muted); font-size: 0.95em; }
-    .badges{ display:flex; flex-wrap:wrap; gap:6px; margin-top: 4px; }
-    .badge{ font-size:12px; font-weight:700; padding:4px 8px; border-radius:999px; border:1px solid var(--border); background:var(--chip); color:var(--chip-text); }
+    .badges{ display:flex; flex-wrap:wrap; gap:6px; margin-top: 8px; }
+    .badge{
+      font-size:12px;
+      font-weight:700;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--chip);
+      color:var(--chip-text);
+    }
     .badge.ok{ background:#ecfdf5; color: var(--ok); }
     .badge.warn{ background:#fef3c7; color: var(--warn); }
-    .cofirst{ color:var(--muted); font-style:italic; margin-top:4px; }
-
-    /* News styling */
+    .badge.red{ background:#fee2e2; color:#b91c1c; }
     .news-item{ display:flex; gap:10px; align-items:flex-start; }
     .news-item .date{ font-weight:700; white-space:nowrap; }
-
-    /* Social bar near footer */
     .socials{ display:flex; justify-content:center; gap:12px; margin-top: 8px; }
 
+    .research-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:20px;
+    }
+    .research-grid img{
+      width:100%;
+      border-radius:8px;
+      border:1px solid var(--border);
+      margin-bottom:10px;
+    }
+
+    @media (max-width: 720px){
+      nav{ flex-wrap:wrap; gap:12px; }
+      .hero{ grid-template-columns: 1fr; }
+      .avatar{ width:180px; height:180px; }
+    }
   </style>
 </head>
+
 <body>
   <header>
     <nav aria-label="Primary">
-      <div class="brand">Wanting Mao <span class="cn">· 毛婉婷</span></div>
+      <div class="brand">Ruihang Zhang</div>
       <div class="spacer"></div>
       <a class="link" href="#about">About</a>
-      <a class="link" href="#news">News</a>
       <a class="link" href="#education">Education</a>
+      <a class="link" href="#experience">Experience</a>
       <a class="link" href="#publications">Publications</a>
-      <!-- <a class="link" href="#experience">Experience</a>
-      <a class="link" href="#projects">Projects</a> -->
       <a class="link" href="#contact">Contact</a>
     </nav>
   </header>
 
   <main class="container">
     <section class="hero">
-      <img class="avatar" src="img/my_photo2.jpg" alt="Wanting Mao portrait" />
+      <img class="avatar" src="img/profile.picture.png" alt="Ruihang Zhang portrait" />
       <div>
-        <h1>Wanting Mao <span class="cn">毛婉婷</span></h1>
-        <div class="sub">Second-year PhD student in Computer Science at UIUC · advised by Prof. Jim Rehg</div>
+        <h1>Ruihang Zhang</h1>
+        <div class="sub">University of Toronto</div>
         <div class="chiprow" aria-label="Research interests">
-          <div class="chip">AI for Healthcare</div>
-          <div class="chip">Self-Supervised Learning</div>
-          <div class="chip">Time-Series</div>
+          <div class="chip">Controllable Video Generation & Editing</div>
+          <div class="chip">Video Diffusion Models</div>
+          <div class="chip">3D/4D Generation</div>
         </div>
         <div class="actions">
           <div class="iconbar" aria-label="Profiles and email">
-            <a class="iconbtn" id="icon-email" href="mailto:wmao8@illinois.edu" title="Email" aria-label="Email">
-              <!-- mail icon -->
+            <a class="iconbtn" id="icon-email" href="mailto:ruihang.zhang@mail.utoronto.ca" title="Email" aria-label="Email">
               <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Zm2-.5 7 5 7-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
             </a>
             <a class="iconbtn" id="icon-scholar" href="#" title="Google Scholar" aria-label="Google Scholar">
-              <!-- scholar cap icon -->
               <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Zm-7 9v4a7 7 0 0 0 14 0v-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
             <a class="iconbtn" id="icon-linkedin" href="#" title="LinkedIn" aria-label="LinkedIn">
@@ -139,12 +191,6 @@
             <a class="iconbtn" id="icon-github" href="#" title="GitHub" aria-label="GitHub">
               <img class="icon" src="https://cdn.simpleicons.org/github/2563EB" alt="GitHub"/>
             </a>
-            <a class="iconbtn" id="icon-cv" href="files/Wanting_Mao_CV.pdf" title="CV" aria-label="CV">
-              <!-- mail icon -->
-              <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13 9L15 15L17 9M10 15C9.06812 15 8.60218 15 8.23463 14.8478C7.74458 14.6448 7.35523 14.2554 7.15224 13.7654C7 13.3978 7 12.9319 7 12C7 11.0681 7 10.6022 7.15224 10.2346C7.35523 9.74458 7.74458 9.35523 8.23463 9.15224C8.60218 9 9.06812 9 10 9M7.2 20H16.8C17.9201 20 18.4802 20 18.908 19.782C19.2843 19.5903 19.5903 19.2843 19.782 18.908C20 18.4802 20 17.9201 20 16.8V7.2C20 6.0799 20 5.51984 19.782 5.09202C19.5903 4.71569 19.2843 4.40973 18.908 4.21799C18.4802 4 17.9201 4 16.8 4H7.2C6.0799 4 5.51984 4 5.09202 4.21799C4.71569 4.40973 4.40973 4.71569 4.21799 5.09202C4 5.51984 4 6.07989 4 7.2V16.8C4 17.9201 4 18.4802 4.21799 18.908C4.40973 19.2843 4.71569 19.5903 5.09202 19.782C5.51984 20 6.07989 20 7.2 20Z" stroke="#2563EB" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
           </div>
         </div>
       </div>
@@ -153,113 +199,77 @@
     <section id="about"> 
       <h2>About Me</h2> 
       <div class="card"> 
-        <p>I'm a second-year PhD student in Computer Science at the <strong>University of Illinois Urbana-Champaign</strong>, advised by <a href="https://rehg.org/"><strong>Prof. Jim Rehg</strong></a>. Before my PhD, I completed dual B.S. degrees in <strong>Data Science</strong> and <strong>Applied Mathematics</strong> at <strong>UC San Diego</strong>.</p> <p>My research focuses on <strong>AI for healthcare</strong> with a current emphasis on <strong>self-supervised learning</strong> for <strong>time-series Foundation Models</strong>. My goal is to translate foundation models for biosignals into safe, equitable, real-world impact. Borrowing Bayer's slogan, my motto is: <em>Science for a Better Life</em>.</p> 
+        <p>
+          I am an <a href="https://engsci.utoronto.ca/program/what-is-engsci/">Engineering Science</a> graduate at the
+          University of Toronto, supervised by Prof. <a href="https://davidlindell.com/">David Lindell</a>.
+          My research interests are controllable generative models and video generation &amp; editing.
+        </p>
+
+        <p>
+          Previously, I was a research intern with the Creative Vision team at
+          <a href="https://research.snap.com/">Snap Research</a>, working on image personalization with
+          <a href="https://guochengqian.github.io/">Guocheng Gordon Qian</a>,
+          <a href="https://wangkua1.github.io/">Kuan-Chieh Jackson Wang</a>, and
+          <a href="https://stulyakov.com/">Sergey Tulyakov</a>.
+          I was also an undergraduate research intern in the
+          <a href="http://www.modelics.org/">Modelics Lab</a> with Prof.
+          <a href="https://www.ece.utoronto.ca/people/triverio-p/">Piero Triverio</a>, working on 4D dynamic CT analysis.
+        </p>
       </div> 
     </section>
 
-    <section id="news">
-      <h2>News 📢</h2>
-      <div class="card news-item">
-        <span class="date">Jul 4, 2025 —</span>
-        <span class="text">Proud to be the <strong>organizer</strong> of the <a href="https://timeseries4health.github.io/">NeurIPS 2025 Time-Series for Health (TS4H) Workshop</a>. Looking forward to meeting everyone in San Diego on December 7, 2025!</span>
-      </div>
-    </section>
-
-    <!-- ===== RESEARCH HIGHLIGHTS ===== -->
-    <section id="research">
-      <h2>Research Highlights ✨</h2>
-      <div class="list" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:20px;">
-        
-        <div class="card pub">
-          <img src="img/proto_acc.png" alt="Prototype-based Multimodal Model figure" style="width:100%;border-radius:8px;border:1px solid var(--border);margin-bottom:10px;">
-          <div class="meta"><em>In Review at ICLR 2026</em></div>
-          <div class="title">ProtoMM: Leveraging Shared Prototypes for a Multimodal Pulse Motion Foundation Model</div>
-          <p>ProtoMM introduces a prototype-based framework for multimodal self-supervised learning on time-series data. By clustering embeddings around shared prototypes, ProtoMM discovers common physiological states and achieves state-of-the-art performance across diverse tasks.
-          </p>
-          <div class="badges">
-            <a class="badge" href="https://arxiv.org/abs/2510.09764">Paper</a>
-            <a class="badge" href="https://drive.google.com/file/d/1VTbFYTX4LszUW46VQNFEIqWtY4oQoqkq/view?usp=sharing">Poster</a>
-          </div>
-        </div>
-
-        <!-- <div class="card pub">
-          <img src="img/pulseppg_fig.png" alt="Pulse-PPG figure" style="width:100%;border-radius:8px;border:1px solid var(--border);margin-bottom:10px;">
-          <div class="meta"><em>IMWUT / UbiComp 2025</em></div>
-          <div class="title">Pulse-PPG: An Open-Source Field-Trained PPG Foundation Model</div>
-          <p>Pulse-PPG provides a large-scale foundation model for photoplethysmography (PPG) signals, trained on in-the-wild datasets. It generalizes across lab and field settings and enables heart-rate, stress, and activity inference on consumer wearables.</p>
-          <div class="badges">
-            <a class="badge" href="https://dl.acm.org/doi/abs/10.1145/3749494">Paper</a>
-            <a class="badge" href="https://github.com/maxxu05/pulseppg">Code</a>
-            <a class="badge" href="https://zenodo.org/records/17345536">Weights</a>
-          </div>
-        </div> -->
-      </div>
-    </section>
-
-
-    <!-- ===== EDUCATION ===== -->
     <section id="education">
-      <h2>Education 🎓</h2>
+      <h2>Education</h2>
       <div class="card">
-        <p><strong>University of Illinois Urbana-Champaign (UIUC)</strong><br>
-          <em>Ph.D. in Computer Science</em> · Advisor: <a href="https://rehg.org" target="_blank" rel="noopener">Prof. Jim Rehg</a><br>
-          Aug 2024 - May 2029 (expected) · Champaign, IL<br>
-          GPA: 4.0 / 4.0
-        </p>
-        <hr style="border:none;border-top:1px solid var(--border);margin:8px 0;">
-        <p><strong>University of California, San Diego (UCSD)</strong><br>
-          <em>B.S. in Data Science</em> & <em>B.S. in Applied Mathematics</em> · Magna Cum Laude<br>
-          Sep 2020 - June 2024 · La Jolla, CA<br>
-          GPA: 3.955 / 4.0 · Awarded <em>Marshall College Honors</em> and <em>Provost Honors</em> (2021-2024)
+        <p>
+          University of Toronto<br>
+          <em>BASc in Engineering Science, Machine Intelligence</em><br>
+          Sep 2021 – May 2026 · Toronto, Canada
         </p>
       </div>
     </section>
 
-    <!-- ===== SERVICE ===== -->
-    <section id="service">
-      <h2>Academic Service & Leadership 💼</h2>
-      <div class="card">
-        <p>Organizer, <a href="https://timeseries4health.github.io/" target="_blank" rel="noopener"><strong>NeurIPS 2025 Time-Series for Health (TS4H) Workshop</strong></a> · San Diego, CA · Dec 2025</p>
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="list">
+        <div class="card">
+          <p><strong>Snap Research, Snap Inc.</strong><br>
+          <em>Research Intern</em> · May 2025 – Sept 2025</p>
+        </div>
+        <div class="card">
+          <p><strong>Toronto Computational Imaging Group</strong><br>
+          <em>Research Intern</em> · May 2024 – Present</p>
+        </div>
       </div>
+    </section>
 
     <section id="publications">
       <h2>Publications</h2>
       <div class="list">
         <div class="card pub">
-          <div class="title">Leveraging Shared Prototypes for a Multimodal Pulse Motion Foundation Model</div>
-          <div class="meta">Wanting Mao†, Maxwell A. Xu†, Harish Haresamudram, Mithun Saha, Santosh Kumar, James Matthew Rehg</div>
-          <div class="meta"><em>In review at ICLR, 2026</em></div>
-          <div class="cofirst">† Co-first authors</div>
+          <div class="title">MVP4D: Multi-View Portrait Video Diffusion for Animatable 4D Avatars</div>
+          <div class="meta">
+            Felix Taubner, <strong>Ruihang Zhang</strong>, Mathieu Tuli, Sherwin Bahmani, David B. Lindell
+          </div>
+          <div class="meta"><em>SIGGRAPH Asia, 2025</em></div>
           <div class="badges">
-            <span class="badge warn">Under Review</span>
-            <a class="badge" href="https://arxiv.org/abs/2510.09764">Paper</a>
-            <a class="badge" href="https://drive.google.com/file/d/1VTbFYTX4LszUW46VQNFEIqWtY4oQoqkq/view?usp=sharing">Poster</a>
+            <a class="badge" href="https://felixtaubner.github.io/mvp4d/">Project Page</a>
+            <a class="badge" href="https://arxiv.org/abs/2510.12785">arXiv</a>
           </div>
         </div>
-        <div class="card pub">
-          <div class="title">Pulse-PPG: An Open-Source Field-Trained PPG Foundation Model for Wearable Applications Across Lab and Field Settings</div>
-          <div class="meta">Mithun Saha†, Maxwell A. Xu†, Wanting Mao, Sameer Neupane, James M. Rehg, Santosh Kumar</div>
-          <div class="meta"><em>Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies (IMWUT / UbiComp), 2025</em></div>
-          <div class="cofirst">† Co-first authors</div>
-          <div class="badges">
-            <span class="badge ok">Accepted</span>
-            <a class="badge" href="https://dl.acm.org/doi/abs/10.1145/3749494">Paper</a>
-            <a class="badge" href="https://github.com/maxxu05/pulseppg">Code</a>
-            <a class="badge" href="https://zenodo.org/records/17345536">Weights</a>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section id="research">
-      <h2>Selected Undergrad Research 🧪</h2>
-      <div class="card">
-        <ul>
-          <li>Implemented eight <strong>distribution-testing algorithms</strong> (ERSP @ UCSD, Advisor: Prof. Daniel M. Kane), presented at the 2022 Undergraduate Research Symposium.</li>
-          <li>Developed a <strong>diffusion-based image generation system</strong> improving numerical accuracy and object count consistency (Capstone with Profs. Alex Cloninger & Rayan Saab).</li>
-          <li>Studied <strong>high-fidelity video generation</strong> algorithms with customized scenes (Tencent Games Rocket Plan, 2024).</li>
-          <li>Built a <strong>security-focused recommendation chatbot</strong> and presented findings at UCSD’s Summer Research Conference (Advisor: Prof. Imani N. S. Munyaka).</li>
-        </ul>
+        <div class="card pub">
+          <div class="title">CAP4D: Creating Animatable 4D Portrait Avatars with Morphable Multi-View Diffusion Models</div>
+          <div class="meta">
+            Felix Taubner, <strong>Ruihang Zhang</strong>, Mathieu Tuli, David B. Lindell
+          </div>
+          <div class="meta"><em>CVPR, 2025</em></div>
+          <div class="badges">
+            <a class="badge" href="https://felixtaubner.github.io/cap4d/">Project Page</a>
+            <a class="badge" href="https://arxiv.org/abs/2412.12093">arXiv</a>
+            <span class="badge red">Oral Presentation, 0.73%</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -267,62 +277,63 @@
       <h2>Contact</h2>
       <div class="card">
         <div class="socials" aria-label="Social links">
-          <a class="iconbtn" id="footer-email" href="mailto:wmao8@illinois.edu" title="Email" aria-label="Email">
-              <!-- mail icon -->
-              <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Zm2-.5 7 5 7-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-            </a>
-            <a class="iconbtn" id="footer-scholar" href="#" title="Google Scholar" aria-label="Google Scholar">
-              <!-- scholar cap icon -->
-              <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Zm-7 9v4a7 7 0 0 0 14 0v-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a class="iconbtn" id="footer-linkedin" href="#" title="LinkedIn" aria-label="LinkedIn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#2563EB" viewBox="0 0 16 16">
-                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 
-                  .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 
-                  12.248V6.169H2.542v7.225zm-1.2-8.212c.837 
-                  0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 
-                  3.226 2.4 3.934c0 .694.521 1.248 
-                  1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 
-                  1.232-.878.869 0 1.216.662 1.216 
-                  1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 
-                  0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 
-                  0 7.225 0 7.225z"/>
-              </svg>
-            </a>
-            <a class="iconbtn" id="footer-github" href="#" title="GitHub" aria-label="GitHub">
-              <img class="icon" src="https://cdn.simpleicons.org/github/2563EB" alt="GitHub"/>
-            </a>
+          <a class="iconbtn" id="footer-email" href="mailto:ruihang.zhang@mail.utoronto.ca" title="Email" aria-label="Email">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Zm2-.5 7 5 7-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </a>
+          <a class="iconbtn" id="footer-scholar" href="#" title="Google Scholar" aria-label="Google Scholar">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Zm-7 9v4a7 7 0 0 0 14 0v-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="iconbtn" id="footer-linkedin" href="#" title="LinkedIn" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#2563EB" viewBox="0 0 16 16">
+              <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 
+                .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 
+                12.248V6.169H2.542v7.225zm-1.2-8.212c.837 
+                0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 
+                3.226 2.4 3.934c0 .694.521 1.248 
+                1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 
+                1.232-.878.869 0 1.216.662 1.216 
+                1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 
+                0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 
+                0 7.225 0 7.225z"/>
+            </svg>
+          </a>
+          <a class="iconbtn" id="footer-github" href="#" title="GitHub" aria-label="GitHub">
+            <img class="icon" src="https://cdn.simpleicons.org/github/2563EB" alt="GitHub"/>
+          </a>
         </div>
-        <p style="text-align:center;margin-top:10px; color:var(--muted);">Email: <a href="mailto:wmao8@illinois.edu">wmao8@illinois.edu</a></p>
+        <p style="text-align:center;margin-top:10px; color:var(--muted);">
+          Email: <a href="mailto:ruihang.zhang@mail.utoronto.ca">ruihang.zhang@mail.utoronto.ca</a>
+        </p>
       </div>
     </section>
 
-    <!-- <section id="links">
-      <h2>External Links</h2>
-      <div class="card">
-        <p>🔗 More resources and project pages will appear here.</p>
-      </div>
-    </section>
-
-    <footer>
-      <small>© <span id="y"></span> Wanting Mao. Hosted on GitHub Pages.</small>
-    </footer> -->
+    <footer style="padding: 24px 0; text-align:center; color:var(--muted);">
+      <small>© <span id="y"></span> Ruihang Zhang</small>
+    </footer>
   </main>
 
   <script>
     const LINKS = {
-      scholar: 'https://scholar.google.com/citations?user=G58w52MAAAAJ&hl=en',
-      linkedin: 'https://www.linkedin.com/in/wanting-mao-351a22238/',
-      github: 'https://github.com/wantingmao01',
-      email: 'mailto:wmao8@illinois.edu'
+      scholar: 'https://scholar.google.com/citations?user=KFx-0xIAAAAJ&hl=en',
+      linkedin: 'https://www.linkedin.com/in/ruihang-zhang-3059b6243/',
+      github: 'https://github.com/ruihangzhang97',
+      email: 'mailto:ruihang.zhang@mail.utoronto.ca'
     };
-    function setHref(id, url){ const el = document.getElementById(id); if(el && url){ el.href=url; el.target = url.startsWith('http') ? '_blank' : ''; el.rel = 'noopener'; } }
-    // Top iconbar
+
+    function setHref(id, url){
+      const el = document.getElementById(id);
+      if(el && url){
+        el.href = url;
+        el.target = url.startsWith('http') ? '_blank' : '';
+        el.rel = 'noopener';
+      }
+    }
+
     setHref('icon-scholar', LINKS.scholar);
     setHref('icon-linkedin', LINKS.linkedin);
     setHref('icon-github', LINKS.github);
     setHref('icon-email', LINKS.email);
-    // Footer socials
+
     setHref('footer-scholar', LINKS.scholar);
     setHref('footer-linkedin', LINKS.linkedin);
     setHref('footer-github', LINKS.github);
