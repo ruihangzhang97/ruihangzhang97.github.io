@@ -139,6 +139,48 @@
       .hero{ grid-template-columns: 1fr; }
       .avatar{ width:180px; height:180px; }
     }
+
+    .entry {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .entry-logo {
+      width: 88px;
+      height: 88px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .entry-content {
+      flex: 1;
+    }
+
+    .entry-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .entry-subtitle {
+      font-style: italic;
+    }
+
+    .entry-meta {
+      color: var(--muted);
+    }
+
+    @media (max-width: 720px) {
+      .entry {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .entry-logo {
+        width: 64px;
+        height: 64px;
+      }
+    }
   </style>
 </head>
 
@@ -220,26 +262,91 @@
 
     <section id="education">
       <h2>Education</h2>
+    
       <div class="card">
-        <p>
-          University of Toronto<br>
-          <em>BASc in Engineering Science, Machine Intelligence</em><br>
-          Sep 2021 – May 2026 · Toronto, Canada
-        </p>
+        <div class="entry">
+    
+          <img
+            class="entry-logo"
+            src="img/logos/uoft.png"
+            alt="University of Toronto Logo"
+          >
+    
+          <div class="entry-content">
+            <div class="entry-title">
+              University of Toronto
+            </div>
+    
+            <div class="entry-subtitle">
+              BASc in Engineering Science, Machine Intelligence
+            </div>
+    
+            <div class="entry-meta">
+              Sep 2021 – May 2026 · Toronto, Canada
+            </div>
+          </div>
+    
+        </div>
       </div>
     </section>
 
     <section id="experience">
       <h2>Experience</h2>
+    
       <div class="list">
+    
         <div class="card">
-          <p><strong>Snap Research, Snap Inc.</strong><br>
-          <em>Research Intern</em> · May 2025 – Sept 2025</p>
+          <div class="entry">
+    
+            <img
+              class="entry-logo"
+              src="img/logos/snap.png"
+              alt="Snap Research Logo"
+            >
+    
+            <div class="entry-content">
+              <div class="entry-title">
+                Snap Research, Snap Inc.
+              </div>
+    
+              <div class="entry-subtitle">
+                Research Intern
+              </div>
+    
+              <div class="entry-meta">
+                May 2025 – Sept 2025
+              </div>
+            </div>
+    
+          </div>
         </div>
+    
         <div class="card">
-          <p><strong>Toronto Computational Imaging Group</strong><br>
-          <em>Research Intern</em> · May 2024 – May 2026</p>
+          <div class="entry">
+    
+            <img
+              class="entry-logo"
+              src="img/logos/tcig.png"
+              alt="Toronto Computational Imaging Group Logo"
+            >
+    
+            <div class="entry-content">
+              <div class="entry-title">
+                Toronto Computational Imaging Group
+              </div>
+    
+              <div class="entry-subtitle">
+                Research Intern
+              </div>
+    
+              <div class="entry-meta">
+                May 2024 – May 2026
+              </div>
+            </div>
+    
+          </div>
         </div>
+    
       </div>
     </section>
 
