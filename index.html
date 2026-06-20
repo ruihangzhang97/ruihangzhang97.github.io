@@ -181,6 +181,36 @@
         height: 64px;
       }
     }
+
+    .pub-entry {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .pub-thumb {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .pub-content {
+      flex: 1;
+    }
+
+    @media (max-width: 720px) {
+      .pub-entry {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .pub-thumb {
+        width: 100px;
+        height: 100px;
+      }
+    }
   </style>
 </head>
 
@@ -352,31 +382,91 @@
 
     <section id="publications">
       <h2>Publications</h2>
+    
       <div class="list">
+    
         <div class="card pub">
-          <div class="title">MVP4D: Multi-View Portrait Video Diffusion for Animatable 4D Avatars</div>
-          <div class="meta">
-            Felix Taubner, <strong>Ruihang Zhang</strong>, Mathieu Tuli, Sherwin Bahmani, David B. Lindell
-          </div>
-          <div class="meta"><em>SIGGRAPH Asia, 2025</em></div>
-          <div class="badges">
-            <a class="badge" href="https://felixtaubner.github.io/mvp4d/">Project Page</a>
-            <a class="badge" href="https://arxiv.org/abs/2510.12785">arXiv</a>
+          <div class="pub-entry">
+    
+            <img
+              class="pub-thumb"
+              src="img/pubs/mvp4d.png"
+              alt="MVP4D teaser"
+            >
+    
+            <div class="pub-content">
+    
+              <div class="title">
+                MVP4D: Multi-View Portrait Video Diffusion for Animatable 4D Avatars
+              </div>
+    
+              <div class="meta">
+                Felix Taubner, <strong>Ruihang Zhang</strong>, Mathieu Tuli,
+                Sherwin Bahmani, David B. Lindell
+              </div>
+    
+              <div class="meta">
+                <em>SIGGRAPH Asia, 2025</em>
+              </div>
+    
+              <div class="badges">
+                <a class="badge" href="https://felixtaubner.github.io/mvp4d/" target="_blank">
+                  Project Page
+                </a>
+    
+                <a class="badge" href="https://arxiv.org/abs/2510.12785" target="_blank">
+                  arXiv
+                </a>
+              </div>
+    
+            </div>
+    
           </div>
         </div>
-
+    
         <div class="card pub">
-          <div class="title">CAP4D: Creating Animatable 4D Portrait Avatars with Morphable Multi-View Diffusion Models</div>
-          <div class="meta">
-            Felix Taubner, <strong>Ruihang Zhang</strong>, Mathieu Tuli, David B. Lindell
-          </div>
-          <div class="meta"><em>CVPR, 2025</em></div>
-          <div class="badges">
-            <a class="badge" href="https://felixtaubner.github.io/cap4d/">Project Page</a>
-            <a class="badge" href="https://arxiv.org/abs/2412.12093">arXiv</a>
-            <span class="badge red">Oral</span>
+          <div class="pub-entry">
+    
+            <img
+              class="pub-thumb"
+              src="img/pubs/cap4d.png"
+              alt="CAP4D teaser"
+            >
+    
+            <div class="pub-content">
+    
+              <div class="title">
+                CAP4D: Creating Animatable 4D Portrait Avatars with Morphable Multi-View Diffusion Models
+              </div>
+    
+              <div class="meta">
+                Felix Taubner, <strong>Ruihang Zhang</strong>,
+                Mathieu Tuli, David B. Lindell
+              </div>
+    
+              <div class="meta">
+                <em>CVPR, 2025</em>
+              </div>
+    
+              <div class="badges">
+                <a class="badge" href="https://felixtaubner.github.io/cap4d/" target="_blank">
+                  Project Page
+                </a>
+    
+                <a class="badge" href="https://arxiv.org/abs/2412.12093" target="_blank">
+                  arXiv
+                </a>
+    
+                <span class="badge red">
+                  Oral Presentation
+                </span>
+              </div>
+    
+            </div>
+    
           </div>
         </div>
+    
       </div>
     </section>
 
