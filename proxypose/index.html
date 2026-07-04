@@ -1,861 +1,763 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-
-
-  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
-  <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="">
-  <meta property="og:title" content="ProxyPose: 6-DoF Pose Tracking via Video-to-Video Translation"/>
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-
-
-  <!-- <meta name="twitter:card" content="summary_large_image"> -->
-  <!-- Keywords for your paper to be indexed by-->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-  <title>ProxyPose</title>
-  <link rel="icon" type="image/png" href="static/images/favicon.png">
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-  rel="stylesheet">
-
-
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/warning.css">
-
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-</script>
-  <script src="https://documentcloud.adobe.com/view-sdk/main.js">
-</script>
-  <script defer src="static/js/fontawesome.all.min.js">
-</script>
-  <script src="static/js/bulma-carousel.min.js">
-</script>
-  <script src="static/js/bulma-slider.min.js">
-</script>
-  <script src="static/js/index.js">
-</script>
-
-
-  <script id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
-</head>
-
-<div class="container is-max-desktop" style="margin-top: 60px;">
-  <div class="columns is-centered">
-    <div class="column has-text-centered" style="max-width: 850px; text-align: center;">
-
-      <h1 class="title is-3 publication-title">
-        ProxyPose: 6-DoF Pose Tracking via Video-to-Video Translation
-      </h1>
-
-      <div class="is-size-5 publication-authors" style="padding-top: 15px;">
-        <span class="author-block">
-          <a href="https://ruihangzhang97.github.io/">Ruihang Zhang</a><sup>*1</sup>,
-          <a href="https://felixtaubner.github.io/">Felix Taubner</a><sup>*1,2</sup>,
-          <a href="https://01pooja10.github.io/">Pooja Ravi</a><sup>1</sup>,
-          <a href="https://www.cs.toronto.edu/~kyros/">Kiriakos N. Kutulakos</a><sup>1,2</sup>,
-          <a href="https://davidlindell.com/">David B. Lindell</a><sup>1,2</sup>
-        </span>
-      </div>
-
-      <div class="is-size-6 publication-authors" style="padding-top: 10px;">
-        <span class="author-block">
-          <sup>1</sup> University of Toronto &nbsp;&nbsp;
-          <sup>2</sup> Vector Institute
-        </span>
-      </div>
-
-      <div class="is-size-6 publication-authors" style="padding-top: 5px;">
-        <span class="author-block">
-          * Equal contribution
-        </span>
-      </div>
-
-      <div class="publication-links" style="margin-top: 25px;">
-
-        <span class="link-block">
-          <a href="https://ruihangzhang97.github.io/proxypose/"
-             class="external-link button is-normal is-rounded is-dark">
-            <span class="icon">
-              <i class="ai ai-arxiv"></i>
-            </span>
-            <span>arXiv</span>
-          </a>
-        </span>
-
-        <span class="link-block">
-          <a href="https://ruihangzhang97.github.io/proxypose/"
-             class="external-link button is-normal is-rounded is-dark">
-            <span class="icon">
-              <i class="fab fa-github"></i>
-            </span>
-            <span>Code</span>
-          </a>
-        </span>
-
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- Teaser video-->
-<section class="hero is-small"></section>
-  <div class="hero-body">
-    <div class="container is-max-desktop" style="margin-top: -30px;">
-      <div class="container" style="text-align: center;">
-        <video poster="videos/teaser/teaser_banner.webp" data-src="videos/teaser/teaser_web.mp4" id="video_teaser" autoplay muted playsinline loop style="width: 50%; object-fit: cover;">
-        </video>
-      </div>
-      <h2 class="subtitle has-text-centered" style="margin-top: 10px;">
-        TL;DR: Our model can track complex 6DoF motion in a video given a single query pixel.
-      </h2>
-    <!-- <div class="hero-body"> -->
-    </div>
-  </div>
-<!-- </div> -->
-  <!-- </div> -->
-<!-- </section> -->
-<!-- End teaser video -->
-
-
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="the-canvas col-md-8 offset-md-2 rounded card" style="max-width: 980px; margin: auto; background-color: #f5f5f5; padding: 20px;">
-      <h2 class="title is-3" style="text-align: center; margin-top: 10px;">
-        Gallery
-      </h2>
-
-
-      <h2 class="subtitle has-text-centered is-6" style="margin-top: 10px; width: 60%; margin-left: auto; margin-right: auto;">
-        Click to switch between 3D tracking visualizations and the generated proxy videos. Select sequences using the thumbnails below.
-      </h2>
-
-
-      <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 14px;">
-        <button id="gallery-tab-tracking" onclick="switchGalleryTab('tracking')"
-          style="padding: 8px 20px; border-radius: 20px; border: 2px solid #363636; background: #363636; color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.15s, color 0.15s;">
-          Tracking Visualization
-        </button>
-        <button id="gallery-tab-proxy" onclick="switchGalleryTab('proxy')"
-          style="padding: 8px 20px; border-radius: 20px; border: 2px solid #363636; background: transparent; color: #363636; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.15s, color 0.15s;">
-          Generated Proxy Videos
-        </button>
-      </div>
-
-
-      <div style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;">
-        <div style="flex: 1 1 420px; max-width: 800px; text-align: center;">
-          <video poster="videos/showcase/balloons_banner.webp" id="video_animation" autoplay muted playsinline loop style="width: 100%; border-radius: 8px;">
-            <source src="videos/showcase/balloons.mp4" type="video/mp4">
-          </video>
-          <video id="video_proxy" autoplay muted playsinline loop style="width: 100%; border-radius: 8px; display: none;"></video>
-          <div id="gallery-captions-tracking" style="display: flex; gap: 10px; margin-top: 8px; font-size: 18px;">
-            <span style="flex: 9; text-align: center;">prompts</span>
-            <span style="flex: 9; text-align: center;">tracking</span>
-            <span style="flex: 16; text-align: center;">3D visualization</span>
-          </div>
-          <div id="gallery-captions-proxy" style="display: none; gap: 10px; margin-top: 0px; font-size: 18px;">
-            <span style="flex: 1; text-align: center;">prompt</span>
-            <span style="flex: 1; text-align: center;">proxy video</span>
-            <span style="flex: 1; text-align: center;">tracked proxy</span>
-            <span style="flex: 1; text-align: center;">6DoF pose</span>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="previews" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 18px;">
-        <a onclick="loadContent('vase_breaking')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/vase_breaking_icon.webp" alt="vase breaking" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('skateboard')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/skateboard_icon.webp" alt="skateboard" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('balloons')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/balloons_icon.webp" alt="balloons" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('bane_airplane_destruction')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/bane_airplane_destruction_icon.webp" alt="bane airplane destruction" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('baseball_swing_3')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/baseball_swing_3_icon.webp" alt="baseball swing" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('beauty_and_best')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/beauty_and_best_icon.webp" alt="beauty and best" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('chicken_gimbal')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/chicken_gimbal_icon.webp" alt="chicken gimbal" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('disco_ball')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/disco_ball_icon.webp" alt="disco ball" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('dude_perfect_airplane')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/dude_perfect_airplane_icon.webp" alt="dude perfect airplane" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('dune_ornithopter')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/dune_ornithopter_icon.webp" alt="dune ornithopter" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('f1_crash_trimmed')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/f1_crash_trimmed_icon.webp" alt="f1 crash" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('face_shout_and_laugh')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/face_shout_and_laugh_icon.webp" alt="face shout and laugh" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('gravity_destruction')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/gravity_destruction_icon.webp" alt="gravity destruction" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('ikea_glass')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/ikea_glass_icon.webp" alt="ikea glass" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('illusion')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/illusion_icon.webp" alt="illusion" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('illusion_cam')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/illusion_cam_icon.webp" alt="illusion cam" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('interstellar_sync')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/interstellar_sync_icon.webp" alt="interstellar sync" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('lumiere_ciotat_out')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/lumiere_ciotat_out_icon.webp" alt="lumiere ciotat" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('mickey_dog_show_out')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/mickey_dog_show_out_icon.webp" alt="mickey dog show" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('mickey_steamboat_out')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/mickey_steamboat_out_icon.webp" alt="mickey steamboat" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('mission_impossible_planes_2')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/mission_impossible_planes_2_icon.webp" alt="mission impossible" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('now_you_see_me_cards')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/now_you_see_me_cards_icon.webp" alt="now you see me" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('pingpong_swing')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/pingpong_swing_icon.webp" alt="pingpong swing" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('roller_coaster_1')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/roller_coaster_1_icon.webp" alt="roller coaster" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('seals_trimmed')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/seals_trimmed_icon.webp" alt="seals trimmed" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('space_oddyssey_bones')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/space_oddyssey_bones_icon.webp" alt="space oddyssey" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('starship_catch')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/starship_catch_icon.webp" alt="starship catch" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('starwars_destruction')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/starwars_destruction_icon.webp" alt="starwars destruction" style="cursor: pointer; border-radius: 6px;"></a>
-        <a onclick="loadContent('starwars_occlusion')" style="display: inline-flex; flex: 0 0 70px;"><img class="card-img" src="videos/showcase/starwars_occlusion_icon.webp" alt="starwars occlusion" style="cursor: pointer; border-radius: 6px;"></a>
-              </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- Image carousel -->
-<!-- <section class="hero is-small"> -->
-  <div class="hero-body">
-    <!-- <div class="container is-max-desktop"> </div> style="text-align: center;"> -->
-    <div class="container is-max-desktop">
-      <!-- Your image here -->
-      <!-- <h2 class="title is-3">Method Overview</h2> -->
-      <h2 class="title is-3" style="margin-top: -10px; margin-bottom: 0px;">Overview</h2><br>
-      <div class="container" style="text-align: center;">
-        <video poster="videos/method/method_video_banner.webp" data-src="videos/method/method_video_web.mp4" id="video_overview" autoplay muted playsinline loop style="width: 90%; object-fit: cover;">
-          <!-- Your video here -->
-          <source  type="video/mp4">
-        </video>
-      </div>
-      <h2 class="subtitle is-max-desktop" style="margin-top: 10px;">
-      Given a source video and a single query pixel, ProxyPose (1) translates the input into a "proxy video" in which a colored cube undergoes the same local rigid-body motion as the queried point, then (2) recovers the 6-DoF pose trajectory via Perspective-n-Point (PnP).
-    </div>
-  </div>
-<!-- </div> -->
-</section>
-
-
-<!-- End image carousel -->
-
-
-<!-- Youtube video -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container is-max-desktop" style="margin-top: 0px; margin-bottom: 10px">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Method</h2>
-      <div class="container" style="text-align: left;">
-        <img src="figures/method.png" alt="method figure" width="100%"/>
-      </div>
-    <!-- <div class="content "></div> -->
-      <h2 class="subtitle is-max-desktop" style="margin-top: 20px;">
-        <b>Overview of ProxyPose. </b> (a) The method takes as input a monocular RGB video and a
-        user-selected query point, both encoded into the latent space of a variational autoencoder.
-        During training, first-frame proxy tokens receive reduced noise for conditioning,
-        subsequent proxy tokens are corrupted with full Gaussian noise, and source video tokens remain
-        noise-free. The source and proxy token streams are concatenated along the token dimension and processed by
-        a LoRA-finetuned video generative model to synthesize a temporally consistent proxy video. (b) The generated
-        proxy video is tracked using learning-free geometric methods&mdash;contour fitting and
-        Perspective-n-Point (PnP) optimization&mdash;to recover the 6-DoF pose of the queried object.
-      </h2>
-      <!-- <h2 class="title is-4">3D Model Fitting</h2>
-      <div class="container" style="text-align: center;">
-        <img src="diagrams/3d_model_fitting.png" alt="3d model fitting" width="50%"/>
-      </div>
-      <div class="content">
-        Lorem ipsum second text if necessary
-      </div> -->
-    </div>
-  </div>
-
-
-</section>
-<!-- End youtube video -->
-
-
-
-
-<!-- TODO -->
- <!-- Teaser video
-
-
- Method video
-
-
- Update gallery and delete bad ones
- Add button to adjust playback speed an visualize proxy videos
-
-
- (applications) Results in the wild camera tracking, face tracking
-
-
- Results in the wild vs cotracker and bundle
-
-
- Results on event based vision and 
-
-
- Results on HO3D
- Results on YCBOeinot
- Results on our dataset
-
-
- Generated proxy videos
-
-
- Failure cases / limitations -->
-
-
-
-
-
-
-<!-- Video carousel -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container is-max-desktop" style="margin-top: 10px">
-      <h2 class="title is-3">Applications</h2>
-
-
-      <h2 class="title is-4" style="margin-top: 30px;">
-        Camera tracking
-      </h2>
-
-
-      <h2 class="subtitle is-max-desktop" style="margin-top: 20px;">
-        Our method can be extended to camera pose tracking by tracking a static point in the world. This enables robust tracking even when COLMAP fails, for example, due to lack of texture.
-      </h2>
-
-
-      <div id="results-carousel" class="carousel results-carousel" >
-        <div class="item" style="text-align: center;">
-          <div style="display: inline-block; max-width: 100%;">
-            <video poster="videos/applications/camera0.webp" data-src="videos/applications/camera0.mp4" autoplay muted playsinline loop style="height: 250px; width: auto; display: block;"><source type="video/mp4"></video>
-          </div>
-        </div>
-
-
-        <div class="item" style="text-align: center;">
-          <div style="display: inline-block; max-width: 100%;">
-            <video poster="videos/applications/camera1.webp" data-src="videos/applications/camera1.mp4" autoplay muted playsinline loop style="height: 250px; width: auto; display: block;"><source type="video/mp4"></video>
-          </div>
-        </div>
-
-
-      </div>
-
-
-
-
-      <h2 class="title is-4" style="margin-top: 30px;">
-        Face tracking
-      </h2>
-      <h2 class="subtitle is-max-desktop" style="margin-top: 20px;">
-        Despite being trained only on rigid objects, ProxyPose can also track non-rigid surfaces such as human faces.
-      </h2>
-      <div class="item" style="text-align: center;">
-      <div style="display: inline-block; max-width: 100%;">
-      <video poster="videos/applications/face_tracking.webp" data-src="videos/applications/face_tracking.mp4" autoplay muted playsinline loop style="height: 250px; width: auto; display: block;"><source type="video/mp4"></video>
-        <div style="display: flex; justify-content: space-evenly; text-align: center; margin-top: 6px;">
-          <span class="subtitle is-6" style="flex: 1; margin-bottom: 0;">ProxyPose tracking</span>
-          <span class="subtitle is-6" style="flex: 2; margin-bottom: 0;">FlowFace tracking</span>
-        </div>
-      </div>
-      </div>
-
-
-      <h2 class="title is-4" style="margin-top: 30px;">
-        Extension to other sensing modalities
-      </h2>
-
-
-      <h2 class="subtitle is-max-desktop" style="margin-top: 20px;">
-        With no additional training, ProxyPose can be applied to other sensing modalities such as event-based video and single-photon imaging. Here we track a hand spinner captured with an event camera and a Nerf gun captured with a single-photon avalanche diode (SPAD) array.
-      </h2>
-      <div class="item" style="text-align: center;">
-      <div style="display: inline-block; max-width: 100%;">
-        <video poster="videos/applications/events_and_photon.webp" data-src="videos/applications/events_and_photon.mp4" autoplay muted playsinline loop style="height: 200px; width: auto; display: block;"><source type="video/mp4"></video>
-        <div style="display: flex; justify-content: space-evenly; text-align: center; margin-top: 6px;">
-          <span class="subtitle is-6" style="flex: 2; margin-bottom: 0;">Event-based video</span>
-          <span class="subtitle is-6" style="flex: 3; margin-bottom: 0;">Single-photon imaging</span>
-        </div>
-      </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-
-<!-- Benchmark Results carousel -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3">Baseline Comparisons</h2>
-      <h2 class="subtitle is-max-desktop" style="margin-top: 20px;">
-        We conduct experiments on 6-DoF pose tracking across various datasets.
-        For quantitative results, we refer the reader to our paper.
-      </h2>
-
-
-      <h2 class="title is-4" style="margin-top: 20px;">In-the-wild</h2>
-
-
-      <h2 class="subtitle is-max-desktop" style="margin-top: 20px;">
-        Previous methods struggle to track objects with challenging materials (e.g., transparent, reflective) and under extreme occlusions.
-        ProxyPose handles these challenging scenarios robustly.
-      </h2>
-
-
-      <div id="benchmark-carousel-ho3d" class="carousel results-carousel">
-
-
-        <div class="item" style="text-align: center;">
-          <div style="display: inline-block; max-width: 100%;">
-            <video poster="videos/benchmark_itw/disco_ball.webp" data-src="videos/benchmark_itw/disco_ball.mp4" autoplay muted playsinline loop style="height: 250px; width: auto; display: block;"><source type="video/mp4"></video>
-            <div style="display: flex; justify-content: space-evenly; text-align: center; margin-top: 6px;">
-              <span class="subtitle is-6" style="flex: 1; margin-bottom: 0;">ProxyPose</span>
-              <span class="subtitle is-6" style="flex: 1; margin-bottom: 0;">CoTracker+DAV3</span>
-              <span class="subtitle is-6" style="flex: 1; margin-bottom: 0;">BundleSDF</span>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="item" style="text-align: center;">
-          <div style="display: inline-block; max-width: 100%;">
-            <video poster="videos/benchmark_itw/ikea_glass.webp" data-src="videos/benchmark_itw/ikea_glass.mp4" autoplay muted playsinline loop style="height: 250px; width: auto; display: block;"><source type="video/mp4"></video>
-            <div style="display: flex; justify-content: space-evenly; text-align: center; margin-top: 6px;">
-              <span class="subtitle is-6" style="flex: 1; margin-bottom: 0;">ProxyPose</span>
-              <span class="subtitle is-6" style="flex: 1; margin-bottom: 0;">CoTracker+DAV3</span>
-              <span class="subtitle is-6" style="flex: 1; margin-bottom: 0;">BundleSDF</span>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="item" style="text-align: center;">
-          <div style="display: inline-block; max-width: 100%;">
-            <video poster="videos/benchmark_itw/interstellar_sync.webp" data-src="videos/benchmark_itw/interstellar_sync.mp4" autoplay muted playsinline loop style="height: 250px; width: auto; display: block;"><source type="video/mp4"></video>
-            <div style="display: flex; justify-content: space-evenly; text-align: center; margin-top: 6px;">
-              <span class="subtitle is-6" style="flex: 1; margin-bottom: 0;">ProxyPose</span>
-              <span class="subtitle is-6" style="flex: 1; margin-bottom: 0;">CoTracker+DAV3</span>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="item" style="text-align: center;">
-          <div style="display: inline-block; max-width: 100%;">
-            <video poster="videos/benchmark_itw/now_you_see_mee.webp" data-src="videos/benchmark_itw/now_you_see_mee.mp4" autoplay muted playsinline loop style="height: 250px; width: auto; display: block;"><source type="video/mp4"></video>
-            <div style="display: flex; justify-content: space-evenly; text-align: center; margin-top: 6px;">
-              <span class="subtitle is-6" style="flex: 1; margin-bottom: 0;">ProxyPose</span>
-              <span class="subtitle is-6" style="flex: 1; margin-bottom: 0;">CoTracker+DAV3</span>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="item" style="text-align: center;">
-          <div style="display: inline-block; max-width: 100%;">
-            <video poster="videos/benchmark_itw/f1_crash.webp" data-src="videos/benchmark_itw/f1_crash.mp4" autoplay muted playsinline loop style="height: 250px; width: auto; display: block;"><source type="video/mp4"></video>
-            <div style="display: flex; justify-content: space-evenly; text-align: center; margin-top: 6px;">
-              <span class="subtitle is-6" style="flex: 1; margin-bottom: 0;">ProxyPose</span>
-              <span class="subtitle is-6" style="flex: 1; margin-bottom: 0;">CoTracker+DAV3</span>
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-
-
-      <h2 class="title is-4" style="margin-top: 30px;">Rigid Pose Tracking Datasets</h2>
-
-
-      <h2 class="subtitle is-max-desktop" style="margin-top: 20px;">
-        We evaluate on rigid pose estimation datasets HO3D, YCBInEOAT, and a set of sequences from the ProxyPose Synthetic Benchmark. Since the objects in these datasets are rigid, multi-query bundle adjustment can be applied, which improves performance in most cases. However, even without incorporating rigidity constraints or bundle adjustment, ProxyPose (one query) achieves state-of-the-art performance.
-      </h2>
-
-
-      <h2 class="title is-5" style="margin-top: 20px;margin-bottom: -5px">HO3D</h2>
-
-
-      <div id="benchmark-carousel-ho3d" class="carousel results-carousel">
-        <div class="item"><video poster="videos/benchmark_videos/ho3d_00000.webp" data-src="videos/benchmark_videos/ho3d_00000.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ho3d_00001.webp" data-src="videos/benchmark_videos/ho3d_00001.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ho3d_00002.webp" data-src="videos/benchmark_videos/ho3d_00002.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ho3d_00003.webp" data-src="videos/benchmark_videos/ho3d_00003.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ho3d_00004.webp" data-src="videos/benchmark_videos/ho3d_00004.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ho3d_00005.webp" data-src="videos/benchmark_videos/ho3d_00005.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ho3d_00006.webp" data-src="videos/benchmark_videos/ho3d_00006.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ho3d_00007.webp" data-src="videos/benchmark_videos/ho3d_00007.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ho3d_00008.webp" data-src="videos/benchmark_videos/ho3d_00008.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ho3d_00009.webp" data-src="videos/benchmark_videos/ho3d_00009.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ho3d_00010.webp" data-src="videos/benchmark_videos/ho3d_00010.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ho3d_00011.webp" data-src="videos/benchmark_videos/ho3d_00011.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ho3d_00012.webp" data-src="videos/benchmark_videos/ho3d_00012.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-      </div>
-
-
-      <h2 class="title is-5" style="margin-top: 40px;margin-bottom: -5px">YCBInEOAT</h2>
-
-
-      <div id="benchmark-carousel-ycbineoat" class="carousel results-carousel">
-        <div class="item"><video poster="videos/benchmark_videos/ycbineoat_00000.webp" data-src="videos/benchmark_videos/ycbineoat_00000.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ycbineoat_00001.webp" data-src="videos/benchmark_videos/ycbineoat_00001.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ycbineoat_00002.webp" data-src="videos/benchmark_videos/ycbineoat_00002.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ycbineoat_00003.webp" data-src="videos/benchmark_videos/ycbineoat_00003.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ycbineoat_00004.webp" data-src="videos/benchmark_videos/ycbineoat_00004.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ycbineoat_00005.webp" data-src="videos/benchmark_videos/ycbineoat_00005.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ycbineoat_00006.webp" data-src="videos/benchmark_videos/ycbineoat_00006.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ycbineoat_00007.webp" data-src="videos/benchmark_videos/ycbineoat_00007.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/ycbineoat_00008.webp" data-src="videos/benchmark_videos/ycbineoat_00008.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-      </div>
-
-
-      <h2 class="title is-5" style="margin-top: 40px; margin-bottom: -5px">ProxyPose Synthetic Benchmark</h2>
-
-
-      <div id="benchmark-carousel-proxy" class="carousel results-carousel">
-        <div class="item"><video poster="videos/benchmark_videos/proxy_00000.webp" data-src="videos/benchmark_videos/proxy_00000.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/proxy_00001.webp" data-src="videos/benchmark_videos/proxy_00001.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/proxy_00002.webp" data-src="videos/benchmark_videos/proxy_00002.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/proxy_00003.webp" data-src="videos/benchmark_videos/proxy_00003.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/proxy_00004.webp" data-src="videos/benchmark_videos/proxy_00004.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/proxy_00009.webp" data-src="videos/benchmark_videos/proxy_00009.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/proxy_00010.webp" data-src="videos/benchmark_videos/proxy_00010.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/proxy_00011.webp" data-src="videos/benchmark_videos/proxy_00011.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/proxy_00012.webp" data-src="videos/benchmark_videos/proxy_00012.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/proxy_00013.webp" data-src="videos/benchmark_videos/proxy_00013.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/proxy_00014.webp" data-src="videos/benchmark_videos/proxy_00014.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-        <div class="item"><video poster="videos/benchmark_videos/proxy_00015.webp" data-src="videos/benchmark_videos/proxy_00015.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video></div>
-      </div>
-
-
-    </div>
-  </div>
-</section>
-<!-- End Benchmark Results carousel -->
-
-
-<!-- Video carousel -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3">Limitations</h2>
-
-
-      <h2 class="subtitle is-max-desktop" style="margin-top: 20px;">
-        Despite its generality, ProxyPose inherits limitations from the underlying video model and proxy-based formulation. We sometimes observe pose drift for reflective or textureless surfaces under complex motion (balloons). Additionally, the approximate local rigidity implied by the proxy can be inconsistent with scenes where tracking is ill-defined (e.g., surface regions on a fluid). Fast motion can exceed the capabilities of the video model's variational autoencoder, producing blurred proxy frames that degrade contour detection and tracking (see the marble racing scene).
-      </h2>
-
-
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 20px; width: 80%; margin-left: auto; margin-right: auto;">
-
-
-        <div style="text-align: center;">
-          <video poster="videos/limitations/failure_balloon.webp" data-src="videos/limitations/failure_balloon.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video>
-          <p class="subtitle is-6" style="margin-top: 6px; margin-bottom: 0;">Reflective/textureless surfaces</p>
-        </div>
-
-
-        <div style="text-align: center;">
-          <video poster="videos/limitations/failure_big_wave.webp" data-src="videos/limitations/failure_big_wave.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video>
-          <p class="subtitle is-6" style="margin-top: 6px; margin-bottom: 0;">Ill-defined motion (fluid)</p>
-        </div>
-
-
-        <div style="text-align: center;">
-          <video poster="videos/limitations/failure_marbles.webp" data-src="videos/limitations/failure_marbles.mp4" autoplay muted playsinline loop width="100%"><source type="video/mp4"></video>
-          <p class="subtitle is-6" style="margin-top: 6px; margin-bottom: 0;">Fast motion (marble racing)</p>
-        </div>
-
-
-      </div>
-
-
-    </div>
-  </div>
-</section>
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const videos = document.querySelectorAll('video[data-src]'); // Select videos with `data-src` attribute
-
-
-    const observer = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          const video = entry.target;
-
-
-          if (entry.isIntersecting) {
-            // Load video source
-            if (video.dataset.src) {
-              video.src = video.dataset.src; // Assign the actual source
-              video.removeAttribute('data-src'); // Clean up attribute
-            }
-
-
-            // Play video when visible
-            if (video.hasAttribute("autoplay")) {
-              video.play();
-            }
-          } else {
-            // Pause video when not visible
-            video.pause();
-          }
-        });
-      },
-      {
-        root: null, // Use the viewport
-        threshold: 0.5, // Trigger when 50% of the video is visible
-      }
-    );
-
-
-    // Observe each video
-    videos.forEach((video) => observer.observe(video));
-  });
-</script>
-
-
-<script>
-  const liveItems = {
-    "balloons": {
-      "ref": "videos/showcase/balloons_icon.webp",
-      "poster": "videos/showcase/balloons_banner.webp",
-      "vid": "videos/showcase/balloons.mp4"
-    },
-    "bane_airplane_destruction": {
-      "ref": "videos/showcase/bane_airplane_destruction_icon.webp",
-      "poster": "videos/showcase/bane_airplane_destruction_banner.webp",
-      "vid": "videos/showcase/bane_airplane_destruction.mp4"
-    },
-    "baseball_swing_3": {
-      "ref": "videos/showcase/baseball_swing_3_icon.webp",
-      "poster": "videos/showcase/baseball_swing_3_banner.webp",
-      "vid": "videos/showcase/baseball_swing_3.mp4"
-    },
-    "beauty_and_best": {
-      "ref": "videos/showcase/beauty_and_best_icon.webp",
-      "poster": "videos/showcase/beauty_and_best_banner.webp",
-      "vid": "videos/showcase/beauty_and_best.mp4"
-    },
-    "big_wave": {
-      "ref": "videos/showcase/big_wave_icon.webp",
-      "poster": "videos/showcase/big_wave_banner.webp",
-      "vid": "videos/showcase/big_wave.mp4"
-    },
-    "chicken_gimbal": {
-      "ref": "videos/showcase/chicken_gimbal_icon.webp",
-      "poster": "videos/showcase/chicken_gimbal_banner.webp",
-      "vid": "videos/showcase/chicken_gimbal.mp4"
-    },
-    "disco_ball": {
-      "ref": "videos/showcase/disco_ball_icon.webp",
-      "poster": "videos/showcase/disco_ball_banner.webp",
-      "vid": "videos/showcase/disco_ball.mp4"
-    },
-    "dude_perfect_airplane": {
-      "ref": "videos/showcase/dude_perfect_airplane_icon.webp",
-      "poster": "videos/showcase/dude_perfect_airplane_banner.webp",
-      "vid": "videos/showcase/dude_perfect_airplane.mp4"
-    },
-    "dune_ornithopter": {
-      "ref": "videos/showcase/dune_ornithopter_icon.webp",
-      "poster": "videos/showcase/dune_ornithopter_banner.webp",
-      "vid": "videos/showcase/dune_ornithopter.mp4"
-    },
-    "events_spinner": {
-      "ref": "videos/showcase/events_spinner_icon.webp",
-      "poster": "videos/showcase/events_spinner_banner.webp",
-      "vid": "videos/showcase/events_spinner.mp4"
-    },
-    "f1_crash_trimmed": {
-      "ref": "videos/showcase/f1_crash_trimmed_icon.webp",
-      "poster": "videos/showcase/f1_crash_trimmed_banner.webp",
-      "vid": "videos/showcase/f1_crash_trimmed.mp4"
-    },
-    "face_shout_and_laugh": {
-      "ref": "videos/showcase/face_shout_and_laugh_icon.webp",
-      "poster": "videos/showcase/face_shout_and_laugh_banner.webp",
-      "vid": "videos/showcase/face_shout_and_laugh.mp4"
-    },
-    "gravity_destruction": {
-      "ref": "videos/showcase/gravity_destruction_icon.webp",
-      "poster": "videos/showcase/gravity_destruction_banner.webp",
-      "vid": "videos/showcase/gravity_destruction.mp4"
-    },
-    "ikea_glass": {
-      "ref": "videos/showcase/ikea_glass_icon.webp",
-      "poster": "videos/showcase/ikea_glass_banner.webp",
-      "vid": "videos/showcase/ikea_glass.mp4"
-    },
-    "ikea_glass_bg_2": {
-      "ref": "videos/showcase/ikea_glass_bg_2_icon.webp",
-      "poster": "videos/showcase/ikea_glass_bg_2_banner.webp",
-      "vid": "videos/showcase/ikea_glass_bg_2.mp4"
-    },
-    "illusion": {
-      "ref": "videos/showcase/illusion_icon.webp",
-      "poster": "videos/showcase/illusion_banner.webp",
-      "vid": "videos/showcase/illusion.mp4"
-    },
-    "illusion_cam": {
-      "ref": "videos/showcase/illusion_cam_icon.webp",
-      "poster": "videos/showcase/illusion_cam_banner.webp",
-      "vid": "videos/showcase/illusion_cam.mp4"
-    },
-    "interstellar_sync": {
-      "ref": "videos/showcase/interstellar_sync_icon.webp",
-      "poster": "videos/showcase/interstellar_sync_banner.webp",
-      "vid": "videos/showcase/interstellar_sync.mp4"
-    },
-    "lumiere_ciotat_out": {
-      "ref": "videos/showcase/lumiere_ciotat_out_icon.webp",
-      "poster": "videos/showcase/lumiere_ciotat_out_banner.webp",
-      "vid": "videos/showcase/lumiere_ciotat_out.mp4"
-    },
-    "marble_race_fail": {
-      "ref": "videos/showcase/marble_race_fail_icon.webp",
-      "poster": "videos/showcase/marble_race_fail_banner.webp",
-      "vid": "videos/showcase/marble_race_fail.mp4"
-    },
-    "mickey_dog_show_out": {
-      "ref": "videos/showcase/mickey_dog_show_out_icon.webp",
-      "poster": "videos/showcase/mickey_dog_show_out_banner.webp",
-      "vid": "videos/showcase/mickey_dog_show_out.mp4"
-    },
-    "mickey_steamboat_out": {
-      "ref": "videos/showcase/mickey_steamboat_out_icon.webp",
-      "poster": "videos/showcase/mickey_steamboat_out_banner.webp",
-      "vid": "videos/showcase/mickey_steamboat_out.mp4"
-    },
-    "mission_impossible_planes_2": {
-      "ref": "videos/showcase/mission_impossible_planes_2_icon.webp",
-      "poster": "videos/showcase/mission_impossible_planes_2_banner.webp",
-      "vid": "videos/showcase/mission_impossible_planes_2.mp4"
-    },
-    "now_you_see_me_cards": {
-      "ref": "videos/showcase/now_you_see_me_cards_icon.webp",
-      "poster": "videos/showcase/now_you_see_me_cards_banner.webp",
-      "vid": "videos/showcase/now_you_see_me_cards.mp4"
-    },
-    "pingpong_swing": {
-      "ref": "videos/showcase/pingpong_swing_icon.webp",
-      "poster": "videos/showcase/pingpong_swing_banner.webp",
-      "vid": "videos/showcase/pingpong_swing.mp4"
-    },
-    "roller_coaster_1": {
-      "ref": "videos/showcase/roller_coaster_1_icon.webp",
-      "poster": "videos/showcase/roller_coaster_1_banner.webp",
-      "vid": "videos/showcase/roller_coaster_1.mp4"
-    },
-    "seals_trimmed": {
-      "ref": "videos/showcase/seals_trimmed_icon.webp",
-      "poster": "videos/showcase/seals_trimmed_banner.webp",
-      "vid": "videos/showcase/seals_trimmed.mp4"
-    },
-    "single_photon": {
-      "ref": "videos/showcase/single_photon_icon.webp",
-      "poster": "videos/showcase/single_photon_banner.webp",
-      "vid": "videos/showcase/single_photon.mp4"
-    },
-    "skateboard": {
-      "ref": "videos/showcase/skateboard_icon.webp",
-      "poster": "videos/showcase/skateboard_banner.webp",
-      "vid": "videos/showcase/skateboard.mp4"
-    },
-    "space_oddyssey_bones": {
-      "ref": "videos/showcase/space_oddyssey_bones_icon.webp",
-      "poster": "videos/showcase/space_oddyssey_bones_banner.webp",
-      "vid": "videos/showcase/space_oddyssey_bones.mp4"
-    },
-    "starship_catch": {
-      "ref": "videos/showcase/starship_catch_icon.webp",
-      "poster": "videos/showcase/starship_catch_banner.webp",
-      "vid": "videos/showcase/starship_catch.mp4"
-    },
-    "starwars_destruction": {
-      "ref": "videos/showcase/starwars_destruction_icon.webp",
-      "poster": "videos/showcase/starwars_destruction_banner.webp",
-      "vid": "videos/showcase/starwars_destruction.mp4"
-    },
-    "starwars_occlusion": {
-      "ref": "videos/showcase/starwars_occlusion_icon.webp",
-      "poster": "videos/showcase/starwars_occlusion_banner.webp",
-      "vid": "videos/showcase/starwars_occlusion.mp4"
-    },
-    "vase_breaking": {
-      "ref": "videos/showcase/vase_breaking_icon.webp",
-      "poster": "videos/showcase/vase_breaking_banner.webp",
-      "vid": "videos/showcase/vase_breaking.mp4"
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ProxyPose: 6-DoF Pose Tracking via Video-to-Video Translation. Given a single query pixel, ProxyPose recovers full 6-DoF object and camera pose from monocular video.">
+<meta property="og:title" content="ProxyPose: 6-DoF Pose Tracking via Video-to-Video Translation"/>
+<title>ProxyPose — 6-DoF Pose Tracking via Video-to-Video Translation</title>
+<link rel="icon" type="image/png" href="static/images/favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- Design tokens (light theme) ---------- */
+  :root{
+    --bg:        #FFFFFF;
+    --surface:   #F6F6F7;
+    --surface-2: #ECECEE;
+    --line:      #E3E3E6;
+
+    --text:      #15171A;
+    --text-dim:  #5B6169;
+    --text-faint:#8A9099;
+
+    --axis-x:    #D6473A; /* red   — roll  */
+    --axis-y:    #2E9C5B; /* green — pitch */
+    --axis-z:    #3B63C7; /* blue  — yaw   */
+
+    --font-display: "Space Grotesk", sans-serif;
+    --font-body:     "IBM Plex Sans", sans-serif;
+    --font-mono:     "IBM Plex Mono", monospace;
+
+    --maxw: 1120px;
+    --radius: 10px;
   }
 
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img,video{ max-width:100%; display:block; }
+  a{ color: inherit; text-decoration: none; }
+
+  .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+  .prose{ max-width: none; }
+
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .eyebrow .rule{ width: 26px; height: 1px; background: var(--text-faint); }
+
+  h1,h2,h3{ font-family: var(--font-display); font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+  h2.section-title{ font-size: 28px; color: var(--text); }
+  h3.sub-title{ font-size: 18px; color: var(--text); margin-bottom: 8px; }
+  p{ color: var(--text-dim); margin: 0; }
+  p + p{ margin-top: 10px; }
+
+  section{ padding: 48px 0; border-top: 1px solid var(--line); }
+  section:first-of-type{ border-top: none; }
+
+  /* ---------- Cube / axis gizmo (signature motif) ---------- */
+  .gizmo{ display:inline-block; line-height:0; }
+  .gizmo svg{ display:block; }
+  .gizmo-spin{ animation: spin 14s linear infinite; transform-origin: 50% 50%; }
+  @keyframes spin{ from{ transform: rotate(0deg); } to{ transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce){ .gizmo-spin{ animation: none; } }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    max-width: var(--maxw); margin: 0 auto; padding: 0 28px;
+    height: 58px; display:flex; align-items:center; justify-content:space-between;
+    gap: 20px;
+  }
+  .nav-brand{ font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.06em; display:flex; align-items:center; gap:10px; }
+  .nav-links{ display:flex; gap: 22px; font-family: var(--font-mono); font-size: 13px; color: var(--text-dim); }
+  .nav-links a:hover{ color: var(--text); }
+  .nav-actions{ display:flex; gap: 10px; }
+  .nav-actions a{
+    border: 1px solid var(--line); border-radius: 6px; padding: 6px 12px;
+    font-family: var(--font-mono); font-size: 12px; color: var(--text-dim);
+    transition: border-color .15s, color .15s;
+  }
+  .nav-actions a:hover{ border-color: var(--axis-z); color: var(--text); }
+  @media (max-width: 760px){ .nav-links{ display:none; } }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding: 64px 0 52px; border-top: none; position: relative; overflow: hidden; }
+  .hero-grid{ display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
+  @media (max-width: 880px){ .hero-grid{ grid-template-columns: 1fr; } }
+
+  .hero h1{ font-size: 40px; line-height: 1.14; margin-bottom: 18px; }
+  @media (max-width: 560px){ .hero h1{ font-size: 30px; } }
+
+  .authors{ font-size: 15px; color: var(--text-dim); margin-bottom: 6px; }
+  .authors a{ color: var(--text); border-bottom: 1px solid var(--text-faint); }
+  .authors a:hover{ border-color: var(--axis-z); }
+  .affils{ font-family: var(--font-mono); font-size: 12.5px; color: var(--text-faint); margin-bottom: 24px; }
+
+  .tldr{
+    font-size: 15px; color: var(--text);
+    border-left: 2px solid var(--axis-y);
+    padding-left: 14px; margin: 20px 0 26px;
+  }
+  .tldr b{ color: var(--axis-y); font-family: var(--font-mono); font-weight: 500; }
+
+  .cta-row{ display:flex; gap: 12px; flex-wrap: wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family: var(--font-mono); font-size: 13px;
+    padding: 10px 18px; border-radius: 7px;
+    border: 1px solid var(--line);
+    transition: border-color .15s, background .15s, color .15s;
+  }
+  .btn:hover{ border-color: var(--axis-z); background: var(--surface); }
+  .btn.primary{ background: var(--text); color: #fff; border-color: var(--text); }
+  .btn.primary:hover{ background: var(--axis-z); border-color: var(--axis-z); color: #fff; }
+
+  .hero-video{ position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: var(--surface); box-shadow: 0 1px 3px rgba(0,0,0,.05); aspect-ratio: 1 / 1; max-width: 325px; margin-left: auto; }
+  .hero-video video{ width: 100%; height: 100%; object-fit: cover; }
+  .hero-video-tag{
+    position:absolute; top:12px; left:12px;
+    font-family: var(--font-mono); font-size:11px; letter-spacing:.08em;
+    color: var(--text); background: rgba(255,255,255,0.85);
+    border: 1px solid var(--line); border-radius: 5px; padding: 4px 8px;
+  }
+
+  /* ---------- Overview / method media ---------- */
+  .media-block{ border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: var(--surface); box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+  .media-block video, .media-block img{ width: 100%; }
+  .caption{ font-family: var(--font-mono); font-size: 12.5px; color: var(--text-faint); margin-top: 14px; }
+
+  /* ---------- Gallery / mini-gallery shared components ---------- */
+  .gallery-panel{
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 26px; margin-top: 24px;
+  }
+  .seg{
+    display:inline-flex; border: 1px solid var(--line); border-radius: 8px; padding: 3px;
+    margin-bottom: 18px; background: var(--bg); flex-wrap: wrap;
+  }
+  .seg button{
+    font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .03em;
+    padding: 8px 16px; border-radius: 6px; border: none; background: transparent;
+    color: var(--text-dim); cursor: pointer; transition: background .15s, color .15s;
+  }
+  .seg button.active{ background: var(--surface-2); color: var(--text); }
+
+  .player{ position: relative; border-radius: 10px; overflow: hidden; background: #000; }
+  .player video{ width: 100%; }
+  .player-labels{ display:grid; gap: 0; margin-top: 12px; font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
+  .player-labels span{ text-align:center; overflow:hidden; padding: 0 16px 0 2px; }
+
+  .thumb-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 92px);
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .thumb{
+    position: relative; border-radius: 8px; overflow: hidden; cursor: pointer;
+    border: 2px solid transparent; aspect-ratio: 1 / 1; background: var(--surface-2);
+    transition: border-color .15s, transform .15s;
+  }
+  .thumb img{ width:100%; height:100%; object-fit: cover; opacity: .9; transition: opacity .15s; }
+  .thumb:hover{ transform: translateY(-2px); }
+  .thumb:hover img{ opacity: 1; }
+  .thumb.active{ border-color: var(--axis-z); }
+  .thumb.active img{ opacity: 1; }
+  .thumb-label{
+    position:absolute; bottom:0; left:0; right:0;
+    font-family: var(--font-mono); font-size: 9.5px; color: #fff;
+    background: linear-gradient(transparent, rgba(0,0,0,.8));
+    padding: 14px 6px 5px; text-align:center; text-transform: capitalize;
+    opacity: 0; transition: opacity .15s;
+  }
+  .thumb:hover .thumb-label, .thumb.active .thumb-label{ opacity: 1; }
+
+  /* small square thumbs for mini-galleries (benchmarks) */
+  .thumb-row{ display:flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .thumb-row .thumb{ width: 92px; flex: 0 0 92px; }
+
+  /* ---------- Applications ---------- */
+  .app-block{ margin-top: 40px; }
+  .app-block:first-of-type{ margin-top: 26px; }
+  .app-row{ display:flex; gap:14px; overflow-x:auto; padding-bottom: 6px; scroll-snap-type: x proximity; }
+  .app-row::-webkit-scrollbar{ height: 6px; }
+  .app-row::-webkit-scrollbar-thumb{ background: var(--line); border-radius: 3px; }
+  .app-item{ flex: 0 0 auto; scroll-snap-align: start; border-radius: 10px; overflow:hidden; border: 1px solid var(--line); background: var(--surface); padding-bottom: 8px; }
+  .app-item video{ height: 220px; width: auto; display:block; background:#000; }
+  .app-item .split-caption{ padding: 0 8px; }
+  .app-single{ border-radius: 10px; overflow:hidden; border: 1px solid var(--line); display:inline-block; }
+  .app-single video{ height: 220px; width:auto; display:block; background:#000; }
+
+  /* shrink-wraps to the video's real rendered width; caption below matches it exactly via width:100% */
+  .media-wrap{ display:inline-block; }
+  .panel-frame{
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 24px; display:flex; justify-content:center;
+  }
+  .center-frame{ display:flex; justify-content:center; }
+  .split-caption{
+    display:grid; width: 100%; font-family: var(--font-mono); font-size: 12px; color: var(--text-faint);
+    margin-top: 8px; text-align:center;
+  }
+  .split-caption span{ overflow:hidden; }
+
+  /* ---------- Benchmarks ---------- */
+  .bench-sub{ margin-top: 40px; }
+  .bench-sub h4{ font-family: var(--font-mono); font-size: 13px; letter-spacing: .04em; color: var(--text-dim); text-transform: uppercase; margin: 0 0 14px; }
+
+  /* ---------- Limitations ---------- */
+  .limit-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+  @media (max-width: 760px){ .limit-grid{ grid-template-columns: 1fr; } }
+  .limit-card{ border-radius: 10px; overflow:hidden; border: 1px solid var(--line); background: var(--surface); }
+  .limit-card video{ width:100%; }
+  .limit-caption{ font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); padding: 10px 12px; border-top: 1px solid var(--line); }
+
+  /* ---------- Footer ---------- */
+  footer{ border-top: 1px solid var(--line); padding: 36px 0; }
+  footer .wrap{ display:flex; justify-content: space-between; align-items:center; flex-wrap:wrap; gap: 12px; }
+  footer p{ font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
+
+  ::selection{ background: var(--axis-z); color: #fff; }
+
+  /* ---------- Citation ---------- */
+  .cite-block{
+    position: relative;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    margin-top: 22px; overflow: hidden;
+  }
+  .cite-block pre{
+    margin: 0; padding: 20px 52px 20px 20px;
+    font-family: var(--font-mono); font-size: 12.5px; line-height: 1.7;
+    color: var(--text); overflow-x: auto; white-space: pre;
+  }
+  .cite-copy{
+    position: absolute; top: 12px; right: 12px;
+    font-family: var(--font-mono); font-size: 11.5px;
+    padding: 6px 10px; border-radius: 6px;
+    border: 1px solid var(--line); background: var(--bg); color: var(--text-dim);
+    cursor: pointer; transition: border-color .15s, color .15s;
+  }
+  .cite-copy:hover{ border-color: var(--axis-z); color: var(--text); }
+  .cite-copy.copied{ border-color: var(--axis-y); color: var(--axis-y); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <span class="gizmo" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24"><g class="gizmo-spin">
+          <line x1="12" y1="12" x2="20" y2="12" stroke="#D6473A" stroke-width="1.6"/>
+          <line x1="12" y1="12" x2="6" y2="20" stroke="#2E9C5B" stroke-width="1.6"/>
+          <line x1="12" y1="12" x2="6" y2="4" stroke="#3B63C7" stroke-width="1.6"/>
+          <circle cx="12" cy="12" r="1.8" fill="#15171A"/>
+        </g></svg>
+      </span>
+      ProxyPose
+    </div>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#method">Method</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#applications">Applications</a>
+      <a href="#benchmarks">Benchmarks</a>
+      <a href="#limitations">Limitations</a>
+      <a href="#citation">Citation</a>
+    </div>
+    <div class="nav-actions">
+      <a href="https://github.com/ruihangzhang97/proxypose">arXiv</a>
+      <a href="https://github.com/ruihangzhang97/proxypose">Code</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="rule"></span>6-DoF Pose Tracking</div>
+      <h1>ProxyPose: 6-DoF Pose Tracking<br>via Video&#8209;to&#8209;Video Translation</h1>
+
+      <div class="authors">
+        <a href="https://ruihangzhang97.github.io/">Ruihang Zhang</a><sup>*1</sup>,
+        <a href="https://felixtaubner.github.io/">Felix Taubner</a><sup>*1,2</sup>,
+        <a href="https://01pooja10.github.io/">Pooja Ravi</a><sup>1</sup>,
+        <a href="https://www.cs.toronto.edu/~kyros/">Kiriakos&nbsp;N.&nbsp;Kutulakos</a><sup>1,2</sup>,
+        <a href="https://davidlindell.com/">David&nbsp;B.&nbsp;Lindell</a><sup>1,2</sup>
+      </div>
+      <div class="affils">1 University of Toronto &nbsp;·&nbsp; 2 Vector Institute &nbsp;·&nbsp; *Equal contribution</div>
+
+      <p class="tldr"><b>TL;DR&nbsp;—</b> one query pixel in, a full 6&#8209;DoF pose trajectory out.</p>
+
+      <div class="cta-row">
+        <a class="btn primary" href="https://github.com/ruihangzhang97/proxypose">Read the paper →</a>
+        <a class="btn" href="https://github.com/ruihangzhang97/proxypose">View code</a>
+      </div>
+    </div>
+
+    <div class="hero-video">
+      <video poster="videos/teaser/teaser.webp" data-src="videos/teaser/teaser.mp4" id="video_teaser" autoplay muted playsinline loop></video>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== OVERVIEW ===================== -->
+<section id="overview">
+  <div class="wrap">
+    <div class="eyebrow"><span class="rule"></span>Overview</div>
+    <h2 class="section-title">One point in, one trajectory out</h2>
+    <p class="prose" style="margin-top:12px;">
+      Given a source video and a single query pixel, ProxyPose first translates the input into a "proxy video" in
+      which a colored cube undergoes the same local rigid-body motion as the queried point, then recovers the
+      6-DoF pose trajectory via Perspective-n-Point (PnP).
+    </p>
+    <div class="media-block" style="margin-top:28px;">
+      <video poster="videos/method/method_video_banner.webp" data-src="videos/method/method_video_web.mp4" id="video_overview" autoplay muted playsinline loop></video>
+    </div>
+    <p class="caption" style="text-align:center; font-weight:600; color:var(--text); font-size:13px;">monocular video + query pixel → proxy video → 6-DoF pose trajectory</p>
+  </div>
+</section>
+
+<!-- ===================== METHOD ===================== -->
+<section id="method">
+  <div class="wrap">
+    <div class="eyebrow"><span class="rule"></span>Method</div>
+    <h2 class="section-title">Video-to-video translation, then classical geometry</h2>
+    <div class="media-block" style="margin-top:26px;">
+      <img src="figures/method.png" alt="ProxyPose method diagram">
+    </div>
+    <p class="prose caption" style="margin-top:18px; font-size:13px; line-height:1.7;">
+      <b style="color:var(--text); font-family:var(--font-body);">Overview of ProxyPose.</b>
+      <b style="color:var(--text); font-family:var(--font-body);">(a)</b> The method takes as input a monocular
+      RGB video and a user-selected query point, both encoded into the latent space of a variational autoencoder.
+      During training, first-frame proxy tokens receive reduced noise for conditioning, subsequent proxy tokens
+      are corrupted with full Gaussian noise, and source video tokens remain noise-free. The source and proxy
+      token streams are concatenated along the token dimension and processed by a LoRA-finetuned video generative
+      model to synthesize a temporally consistent proxy video.
+      <b style="color:var(--text); font-family:var(--font-body);">(b)</b> The generated proxy video is tracked
+      using learning-free geometric methods—contour fitting and Perspective-n-Point (PnP) optimization—to recover
+      the 6-DoF pose of the queried object.
+    </p>
+  </div>
+</section>
+
+<!-- ===================== GALLERY ===================== -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="eyebrow"><span class="rule"></span>Gallery</div>
+    <h2 class="section-title">Browse tracked sequences</h2>
+    <p class="prose" style="margin-top:12px;">Click to switch between 3D tracking visualizations and the generated proxy videos. Select sequences using the thumbnails below.</p>
+
+    <div class="gallery-panel" style="text-align:center;">
+      <div class="seg">
+        <button id="gallery-tab-tracking" class="active" onclick="switchGalleryTab('tracking')">Tracking visualization</button>
+        <button id="gallery-tab-proxy" onclick="switchGalleryTab('proxy')">Generated proxy video</button>
+      </div>
+
+      <div class="player">
+        <video poster="videos/showcase/balloons_banner.webp" id="video_animation" autoplay muted playsinline loop>
+          <source src="videos/showcase/balloons.mp4" type="video/mp4">
+        </video>
+        <video id="video_proxy" autoplay muted playsinline loop style="display:none;"></video>
+      </div>
+
+      <div id="gallery-captions-tracking" class="player-labels" style="grid-template-columns: repeat(3, 1fr);">
+        <span style="padding-right:50px;">query</span><span style="padding-right:110px;">tracking</span><span style="padding-right:50px;">3D visualization</span>
+      </div>
+      <div id="gallery-captions-proxy" class="player-labels" style="grid-template-columns: repeat(4, 1fr); display:none;">
+        <span>query</span><span style="padding-left:60px;">proxy video</span><span>tracked proxy</span><span>6-DoF pose</span>
+      </div>
+
+      <div class="thumb-grid" id="gallery-thumbs" style="grid-template-columns: repeat(10, 92px);"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== APPLICATIONS ===================== -->
+<section id="applications">
+  <div class="wrap">
+    <div class="eyebrow"><span class="rule"></span>Applications</div>
+    <h2 class="section-title">Beyond object pose</h2>
+
+    <div class="app-block">
+      <h3 class="sub-title">Camera tracking</h3>
+      <p class="prose">Our method can be extended to camera pose tracking by tracking a static point in the world. This enables robust tracking even when COLMAP fails, for example, due to lack of texture.</p>
+
+      <div class="app-row" style="margin-top:16px;">
+        <div class="app-item">
+          <video poster="videos/applications/camera0.webp" data-src="videos/applications/camera0.mp4" autoplay muted playsinline loop><source type="video/mp4"></video>
+        </div>
+        <div class="app-item">
+          <video poster="videos/applications/camera1.webp" data-src="videos/applications/camera1.mp4" autoplay muted playsinline loop><source type="video/mp4"></video>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-block">
+      <h3 class="sub-title">Face tracking</h3>
+      <p class="prose">Despite being trained only on rigid objects, ProxyPose can also track non-rigid surfaces such as human faces.</p>
+      <div class="center-frame" style="margin-top:16px;">
+        <div class="media-wrap">
+          <div class="app-single">
+            <video poster="videos/applications/face_tracking.webp" data-src="videos/applications/face_tracking.mp4" autoplay muted playsinline loop><source type="video/mp4"></video>
+          </div>
+          <div class="split-caption" style="grid-template-columns: repeat(3, 1fr);">
+            <span style="grid-column: 1 / 2;">ProxyPose tracking</span>
+            <span style="grid-column: 2 / 4;">FlowFace tracking</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-block">
+      <h3 class="sub-title">Extension to other sensing modalities</h3>
+      <p class="prose">With no additional training, ProxyPose can be applied to other sensing modalities such as event-based video and single-photon imaging. Here we track a hand spinner captured with an event camera and a Nerf gun captured with a single-photon avalanche diode (SPAD) array.</p>
+      <div class="media-wrap" style="margin-top:16px;">
+        <div class="app-single">
+          <video poster="videos/applications/events_and_photon.webp" data-src="videos/applications/events_and_photon.mp4" autoplay muted playsinline loop><source type="video/mp4"></video>
+        </div>
+        <div class="split-caption" style="grid-template-columns: repeat(5, 1fr);">
+          <span style="grid-column: 1 / 3;">Event-based video</span>
+          <span style="grid-column: 3 / 6;">Single-photon imaging</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BENCHMARKS ===================== -->
+<section id="benchmarks">
+  <div class="wrap">
+    <div class="eyebrow"><span class="rule"></span>Baseline comparisons</div>
+    <h2 class="section-title">In-tse-wild videos and rigid pose datasets</h2>
+    <p class="prose" style="margin-top:12px;">We conduct experiments on 6-DoF pose tracking across various datasets. For quantitative results, we refer the reader to our paper.</p>
+
+    <div class="bench-sub">
+      <h4>In the wild videos</h4>
+      <p class="prose" style="margin-bottom:14px;">Previous methods struggle to track objects with challenging materials (e.g., transparent, reflective) and under extreme occlusions. ProxyPose handles these challenging scenarios robustly.</p>
+      <div class="app-row">
+        <div class="app-item">
+          <video poster="videos/benchmark_itw/disco_ball.webp" data-src="videos/benchmark_itw/disco_ball.mp4" autoplay muted playsinline loop><source type="video/mp4"></video>
+          <div class="split-caption" style="grid-template-columns: repeat(3, 1fr);">
+            <span>ProxyPose</span><span>CoTracker+DAV3</span><span>BundleSDF</span>
+          </div>
+        </div>
+        <div class="app-item">
+          <video poster="videos/benchmark_itw/ikea_glass.webp" data-src="videos/benchmark_itw/ikea_glass.mp4" autoplay muted playsinline loop><source type="video/mp4"></video>
+          <div class="split-caption" style="grid-template-columns: repeat(3, 1fr);">
+            <span>ProxyPose</span><span>CoTracker+DAV3</span><span>BundleSDF</span>
+          </div>
+        </div>
+        <div class="app-item">
+          <video poster="videos/benchmark_itw/interstellar_sync.webp" data-src="videos/benchmark_itw/interstellar_sync.mp4" autoplay muted playsinline loop><source type="video/mp4"></video>
+          <div class="split-caption" style="grid-template-columns: repeat(2, 1fr);">
+            <span>ProxyPose</span><span>CoTracker+DAV3</span>
+          </div>
+        </div>
+        <div class="app-item">
+          <video poster="videos/benchmark_itw/now_you_see_mee.webp" data-src="videos/benchmark_itw/now_you_see_mee.mp4" autoplay muted playsinline loop><source type="video/mp4"></video>
+          <div class="split-caption" style="grid-template-columns: repeat(2, 1fr);">
+            <span>ProxyPose</span><span>CoTracker+DAV3</span>
+          </div>
+        </div>
+        <div class="app-item">
+          <video poster="videos/benchmark_itw/f1_crash.webp" data-src="videos/benchmark_itw/f1_crash.mp4" autoplay muted playsinline loop><source type="video/mp4"></video>
+          <div class="split-caption" style="grid-template-columns: repeat(2, 1fr);">
+            <span>ProxyPose</span><span>CoTracker+DAV3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bench-sub">
+      <h4>Rigid Pose Tracking Datasets</h4>
+      <p class="prose" style="margin-bottom:16px;">We evaluate on rigid pose estimation datasets HO3D, YCBInEOAT, and a set of sequences from the ProxyPose Synthetic Benchmark. Since the objects in these datasets are rigid, multi-query bundle adjustment can be applied, which improves performance in most cases. However, even without incorporating rigidity constraints or bundle adjustment, ProxyPose (one query) achieves state-of-the-art performance.</p>
+
+      <div class="gallery-panel" style="text-align:center;">
+        <div class="seg" id="bench-seg">
+          <button data-set="ho3d" class="active">HO3D</button>
+          <button data-set="ycbineoat">YCBInEOAT</button>
+          <button data-set="proxy">ProxyPose</button>
+        </div>
+        <div class="player">
+          <video id="video_bench" autoplay muted playsinline loop></video>
+        </div>
+        <div class="thumb-grid" id="bench-thumbs"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LIMITATIONS ===================== -->
+<section id="limitations">
+  <div class="wrap">
+    <div class="eyebrow"><span class="rule"></span>Limitations</div>
+    <h2 class="section-title">Failure Cases</h2>
+    <p class="prose" style="margin-top:12px;">
+      Despite its generality, ProxyPose inherits limitations from the underlying video model and proxy-based
+      formulation. We sometimes observe pose drift for reflective or textureless surfaces under complex motion
+      (balloons). Additionally, the approximate local rigidity implied by the proxy can be inconsistent with
+      scenes where tracking is ill-defined (e.g., surface regions on a fluid). Fast motion can exceed the
+      capabilities of the video model's variational autoencoder, producing blurred proxy frames that degrade
+      contour detection and tracking (see the marble racing scene).
+    </p>
+    <div class="limit-grid">
+      <div class="limit-card">
+        <video poster="videos/limitations/failure_balloon.webp" data-src="videos/limitations/failure_balloon.mp4" autoplay muted playsinline loop><source type="video/mp4"></video>
+        <div class="limit-caption">Reflective surfaces (balloons)</div>
+      </div>
+      <div class="limit-card">
+        <video poster="videos/limitations/failure_big_wave.webp" data-src="videos/limitations/failure_big_wave.mp4" autoplay muted playsinline loop><source type="video/mp4"></video>
+        <div class="limit-caption">Ill-defined motion (ocean waves)</div>
+      </div>
+      <div class="limit-card">
+        <video poster="videos/limitations/failure_marbles.webp" data-src="videos/limitations/failure_marbles.mp4" autoplay muted playsinline loop><source type="video/mp4"></video>
+        <div class="limit-caption">Fast motion (marble racing)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CITATION ===================== -->
+<section id="citation">
+  <div class="wrap">
+    <div class="eyebrow"><span class="rule"></span>Citation</div>
+    <h2 class="section-title">BibTeX</h2>
+  
+    <div class="cite-block">
+      <button class="cite-copy" id="cite-copy-btn" onclick="copyCitation()">Copy</button>
+      <pre id="cite-text">@article{zhang2026proxypose,
+  title   = {ProxyPose: 6-DoF Pose Tracking via Video-to-Video Translation},
+  author  = {Zhang, Ruihang and Taubner, Felix and Ravi, Pooja and Kutulakos, Kiriakos N. and Lindell, David B.},
+  journal = {arXiv preprint arXiv:XXXX.XXXXX},
+  year    = {2026}
+}</pre>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="nav-brand">
+      <span class="gizmo" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24">
+          <line x1="12" y1="12" x2="20" y2="12" stroke="#D6473A" stroke-width="1.6"/>
+          <line x1="12" y1="12" x2="6" y2="20" stroke="#2E9C5B" stroke-width="1.6"/>
+          <line x1="12" y1="12" x2="6" y2="4" stroke="#3B63C7" stroke-width="1.6"/>
+        </svg>
+      </span>
+      ProxyPose
+    </div>
+    <p>University of Toronto · Vector Institute</p>
+  </div>
+</footer>
+
+<script>
+  /* ---------- generic lazy-load + play/pause on visibility ---------- */
+  function observeVideo(video) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const v = entry.target;
+        if (entry.isIntersecting) {
+          if (v.dataset.src) { v.src = v.dataset.src; v.removeAttribute('data-src'); }
+          if (v.hasAttribute('autoplay')) v.play().catch(() => {});
+        } else {
+          v.pause();
+        }
+      });
+    }, { root: null, threshold: 0.5 });
+    observer.observe(video);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('video[data-src]').forEach(observeVideo);
+  });
+
+  /* ---------- benchmark rows (in-the-wild strip already in markup) ---------- */
+
+  /* ---------- main gallery data ---------- */
+  const liveItems = {
+    "balloons": { ref:"videos/showcase/balloons_icon.webp", poster:"videos/showcase/balloons_banner.webp", vid:"videos/showcase/balloons.mp4" },
+    "bane_airplane_destruction": { ref:"videos/showcase/bane_airplane_destruction_icon.webp", poster:"videos/showcase/bane_airplane_destruction_banner.webp", vid:"videos/showcase/bane_airplane_destruction.mp4" },
+    "baseball_swing": { ref:"videos/showcase/baseball_swing_3_icon.webp", poster:"videos/showcase/baseball_swing_3_banner.webp", vid:"videos/showcase/baseball_swing_3.mp4" },
+    "beauty_and_beast": { ref:"videos/showcase/beauty_and_best_icon.webp", poster:"videos/showcase/beauty_and_best_banner.webp", vid:"videos/showcase/beauty_and_best.mp4" },
+    "chicken_gimbal": { ref:"videos/showcase/chicken_gimbal_icon.webp", poster:"videos/showcase/chicken_gimbal_banner.webp", vid:"videos/showcase/chicken_gimbal.mp4" },
+    "disco_ball": { ref:"videos/showcase/disco_ball_icon.webp", poster:"videos/showcase/disco_ball_banner.webp", vid:"videos/showcase/disco_ball.mp4" },
+    "dude_perfect_airplane": { ref:"videos/showcase/dude_perfect_airplane_icon.webp", poster:"videos/showcase/dude_perfect_airplane_banner.webp", vid:"videos/showcase/dude_perfect_airplane.mp4" },
+    "dune_ornithopter": { ref:"videos/showcase/dune_ornithopter_icon.webp", poster:"videos/showcase/dune_ornithopter_banner.webp", vid:"videos/showcase/dune_ornithopter.mp4" },
+    "f1_crash": { ref:"videos/showcase/f1_crash_trimmed_icon.webp", poster:"videos/showcase/f1_crash_trimmed_banner.webp", vid:"videos/showcase/f1_crash_trimmed.mp4" },
+    "human_face": { ref:"videos/showcase/face_shout_and_laugh_icon.webp", poster:"videos/showcase/face_shout_and_laugh_banner.webp", vid:"videos/showcase/face_shout_and_laugh.mp4" },
+    "gravity_destruction": { ref:"videos/showcase/gravity_destruction_icon.webp", poster:"videos/showcase/gravity_destruction_banner.webp", vid:"videos/showcase/gravity_destruction.mp4" },
+    "ikea_glass": { ref:"videos/showcase/ikea_glass_icon.webp", poster:"videos/showcase/ikea_glass_banner.webp", vid:"videos/showcase/ikea_glass.mp4" },
+    "illusion": { ref:"videos/showcase/illusion_icon.webp", poster:"videos/showcase/illusion_banner.webp", vid:"videos/showcase/illusion.mp4" },
+    "illusion_camera": { ref:"videos/showcase/illusion_cam_icon.webp", poster:"videos/showcase/illusion_cam_banner.webp", vid:"videos/showcase/illusion_cam.mp4" },
+    "interstellar": { ref:"videos/showcase/interstellar_sync_icon.webp", poster:"videos/showcase/interstellar_sync_banner.webp", vid:"videos/showcase/interstellar_sync.mp4" },
+    "la ciotat": { ref:"videos/showcase/lumiere_ciotat_out_icon.webp", poster:"videos/showcase/lumiere_ciotat_out_banner.webp", vid:"videos/showcase/lumiere_ciotat_out.mp4" },
+    "mickey_dog": { ref:"videos/showcase/mickey_dog_show_out_icon.webp", poster:"videos/showcase/mickey_dog_show_out_banner.webp", vid:"videos/showcase/mickey_dog_show_out.mp4" },
+    "mickey_steamboat": { ref:"videos/showcase/mickey_steamboat_out_icon.webp", poster:"videos/showcase/mickey_steamboat_out_banner.webp", vid:"videos/showcase/mickey_steamboat_out.mp4" },
+    "mission_impossible_planes": { ref:"videos/showcase/mission_impossible_planes_2_icon.webp", poster:"videos/showcase/mission_impossible_planes_2_banner.webp", vid:"videos/showcase/mission_impossible_planes_2.mp4" },
+    "now_you_see_me_cards": { ref:"videos/showcase/now_you_see_me_cards_icon.webp", poster:"videos/showcase/now_you_see_me_cards_banner.webp", vid:"videos/showcase/now_you_see_me_cards.mp4" },
+    "pingpong_swing": { ref:"videos/showcase/pingpong_swing_icon.webp", poster:"videos/showcase/pingpong_swing_banner.webp", vid:"videos/showcase/pingpong_swing.mp4" },
+    "roller_coaster": { ref:"videos/showcase/roller_coaster_1_icon.webp", poster:"videos/showcase/roller_coaster_1_banner.webp", vid:"videos/showcase/roller_coaster_1.mp4" },
+    "seals": { ref:"videos/showcase/seals_trimmed_icon.webp", poster:"videos/showcase/seals_trimmed_banner.webp", vid:"videos/showcase/seals_trimmed.mp4" },
+    "skateboard": { ref:"videos/showcase/skateboard_icon.webp", poster:"videos/showcase/skateboard_banner.webp", vid:"videos/showcase/skateboard.mp4" },
+    "space_oddyssey_bones": { ref:"videos/showcase/space_oddyssey_bones_icon.webp", poster:"videos/showcase/space_oddyssey_bones_banner.webp", vid:"videos/showcase/space_oddyssey_bones.mp4" },
+    "starship_catch": { ref:"videos/showcase/starship_catch_icon.webp", poster:"videos/showcase/starship_catch_banner.webp", vid:"videos/showcase/starship_catch.mp4" },
+    "starwars_destruction": { ref:"videos/showcase/starwars_destruction_icon.webp", poster:"videos/showcase/starwars_destruction_banner.webp", vid:"videos/showcase/starwars_destruction.mp4" },
+    "starwars_occlusion": { ref:"videos/showcase/starwars_occlusion_icon.webp", poster:"videos/showcase/starwars_occlusion_banner.webp", vid:"videos/showcase/starwars_occlusion.mp4" },
+    "vase_breaking": { ref:"videos/showcase/vase_breaking_icon.webp", poster:"videos/showcase/vase_breaking_banner.webp", vid:"videos/showcase/vase_breaking.mp4" }
+  };
 
   let galleryActiveTab = 'tracking';
-
 
   function switchGalleryTab(tab) {
     galleryActiveTab = tab;
     const trackingVid = document.getElementById('video_animation');
     const proxyVid = document.getElementById('video_proxy');
-    const trackingCaptions = document.getElementById('gallery-captions-tracking');
-    const proxyCaptions = document.getElementById('gallery-captions-proxy');
-    const btTracking = document.getElementById('gallery-tab-tracking');
-    const btProxy = document.getElementById('gallery-tab-proxy');
-    btTracking.style.background = tab === 'tracking' ? '#363636' : 'transparent';
-    btTracking.style.color    = tab === 'tracking' ? '#fff' : '#363636';
-    btProxy.style.background  = tab === 'proxy'    ? '#363636' : 'transparent';
-    btProxy.style.color       = tab === 'proxy'    ? '#fff' : '#363636';
+    document.getElementById('gallery-tab-tracking').classList.toggle('active', tab === 'tracking');
+    document.getElementById('gallery-tab-proxy').classList.toggle('active', tab === 'proxy');
     trackingVid.style.display = tab === 'tracking' ? '' : 'none';
     proxyVid.style.display = tab === 'proxy' ? '' : 'none';
-    trackingCaptions.style.display = tab === 'tracking' ? 'flex' : 'none';
-    proxyCaptions.style.display = tab === 'proxy' ? 'flex' : 'none';
+    document.getElementById('gallery-captions-tracking').style.display = tab === 'tracking' ? 'grid' : 'none';
+    document.getElementById('gallery-captions-proxy').style.display = tab === 'proxy' ? 'grid' : 'none';
     if (tab === 'tracking') { trackingVid.play().catch(() => {}); proxyVid.pause(); }
     else { proxyVid.play().catch(() => {}); trackingVid.pause(); }
   }
 
-
-  function loadContent(subject_id) {
-    const item = liveItems[subject_id];
+  function loadContent(subjectId) {
+    const item = liveItems[subjectId];
     if (!item) return;
 
-
     const trackingVid = document.getElementById('video_animation');
-    if (trackingVid) {
-      trackingVid.pause();
-      trackingVid.src = item.vid;
-      trackingVid.poster = item.poster;
-      trackingVid.load();
-      if (galleryActiveTab === 'tracking') trackingVid.play().catch(() => {});
-    }
-
+    trackingVid.pause();
+    trackingVid.src = item.vid;
+    trackingVid.poster = item.poster;
+    trackingVid.load();
+    if (galleryActiveTab === 'tracking') trackingVid.play().catch(() => {});
 
     const proxyVid = document.getElementById('video_proxy');
-    if (proxyVid) {
-      proxyVid.pause();
-      proxyVid.src = item.proxy_vid || ('videos/proxy_gen/' + item.vid.split('/').pop());
-      proxyVid.poster = item.proxy_poster || '';
-      proxyVid.load();
-      if (galleryActiveTab === 'proxy') proxyVid.play().catch(() => {});
-    }
+    proxyVid.pause();
+    proxyVid.src = item.proxy_vid || ('videos/proxy_gen/' + item.vid.split('/').pop());
+    proxyVid.poster = item.proxy_poster || '';
+    proxyVid.load();
+    if (galleryActiveTab === 'proxy') proxyVid.play().catch(() => {});
 
-
-    const imageElement = document.querySelector('#reference_image');
-    if (imageElement) imageElement.src = item.ref;
+    document.querySelectorAll('#gallery-thumbs .thumb').forEach((el) => {
+      el.classList.toggle('active', el.dataset.id === subjectId);
+    });
   }
 
+  function buildThumbs() {
+    const grid = document.getElementById('gallery-thumbs');
+    Object.keys(liveItems).forEach((id) => {
+      const item = liveItems[id];
+      const el = document.createElement('div');
+      el.className = 'thumb';
+      el.dataset.id = id;
+      el.onclick = () => loadContent(id);
+      el.innerHTML = `<img src="${item.ref}" alt="${id.replace(/_/g,' ')}" loading="lazy"><div class="thumb-label">${id.replace(/_/g,' ')}</div>`;
+      grid.appendChild(el);
+    });
+  }
+
+  /* camera tracking now uses the same lazy-load scroll row as In the wild — no custom JS needed */
+
+  /* ---------- benchmark two-level gallery ---------- */
+  const benchSets = {
+    ho3d: { prefix: 'ho3d', indices: [0,1,2,3,4,5,6,7,8,9,10,11,12] },
+    ycbineoat: { prefix: 'ycbineoat', indices: [0,1,2,3,4,5,6,7,8] },
+    proxy: { prefix: 'proxy', indices: [0,1,2,3,4,9,10,11,12,13,14,15] }
+  };
+  let activeBenchSet = 'ho3d';
+
+  function benchPath(set, n) {
+    const num = String(n).padStart(5, '0');
+    return {
+      poster: `videos/benchmark_videos/${benchSets[set].prefix}_${num}.webp`,
+      vid: `videos/benchmark_videos/${benchSets[set].prefix}_${num}.mp4`
+    };
+  }
+
+  function loadBench(set, n) {
+    const p = benchPath(set, n);
+    const v = document.getElementById('video_bench');
+    v.pause(); v.src = p.vid; v.poster = p.poster; v.load(); v.play().catch(() => {});
+    document.querySelectorAll('#bench-thumbs .thumb').forEach((el) => {
+      el.classList.toggle('active', el.dataset.set === set && Number(el.dataset.n) === n);
+    });
+  }
+
+  function buildBenchThumbs(set) {
+    const grid = document.getElementById('bench-thumbs');
+    grid.innerHTML = '';
+    benchSets[set].indices.forEach((n) => {
+      const p = benchPath(set, n);
+      const el = document.createElement('div');
+      el.className = 'thumb';
+      el.dataset.set = set;
+      el.dataset.n = n;
+      el.onclick = () => loadBench(set, n);
+      el.innerHTML = `<img src="${p.poster}" alt="${set} ${n}"><div class="thumb-label">seq ${n}</div>`;
+      grid.appendChild(el);
+    });
+  }
+
+  function switchBenchSet(set) {
+    activeBenchSet = set;
+    document.querySelectorAll('#bench-seg button').forEach((b) => b.classList.toggle('active', b.dataset.set === set));
+    buildBenchThumbs(set);
+    loadBench(set, benchSets[set].indices[0]);
+  }
+
+  /* ---------- citation copy ---------- */
+  function copyCitation() {
+    const text = document.getElementById('cite-text').innerText;
+    const btn = document.getElementById('cite-copy-btn');
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
+    }).catch(() => {});
+  }
 
   document.addEventListener('DOMContentLoaded', () => {
+    buildThumbs();
     loadContent('balloons');
+
+    document.querySelectorAll('#bench-seg button').forEach((b) => {
+      b.addEventListener('click', () => switchBenchSet(b.dataset.set));
+    });
+    switchBenchSet('ho3d');
   });
 </script>
 
-
-  </body>
+</body>
 </html>
