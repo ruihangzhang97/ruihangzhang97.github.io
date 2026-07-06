@@ -346,29 +346,6 @@
   </div>
 </section>
 
-<!-- ===================== METHOD ===================== -->
-<section id="method">
-  <div class="wrap">
-    <div class="eyebrow"><span class="rule"></span>Method</div>
-    <h2 class="section-title">Video-to-video translation, then classical geometry</h2>
-    <div class="media-block" style="margin-top:26px;">
-      <img src="figures/method.png" alt="ProxyPose method diagram">
-    </div>
-    <p class="prose caption" style="margin-top:18px; font-size:13px; line-height:1.7;">
-      <b style="color:var(--text); font-family:var(--font-body);">Overview of ProxyPose.</b>
-      <b style="color:var(--text); font-family:var(--font-body);">(a)</b> The method takes as input a monocular
-      RGB video and a user-selected query point, both encoded into the latent space of a variational autoencoder.
-      During training, first-frame proxy tokens receive reduced noise for conditioning, subsequent proxy tokens
-      are corrupted with full Gaussian noise, and source video tokens remain noise-free. The source and proxy
-      token streams are concatenated along the token dimension and processed by a LoRA-finetuned video generative
-      model to synthesize a temporally consistent proxy video.
-      <b style="color:var(--text); font-family:var(--font-body);">(b)</b> The generated proxy video is tracked
-      using learning-free geometric methods—contour fitting and Perspective-n-Point (PnP) optimization—to recover
-      the 6-DoF pose of the queried object.
-    </p>
-  </div>
-</section>
-
 <!-- ===================== GALLERY ===================== -->
 <section id="gallery">
   <div class="wrap">
@@ -398,6 +375,30 @@
 
       <div class="thumb-grid" id="gallery-thumbs" style="grid-template-columns: repeat(10, 92px);"></div>
     </div>
+  </div>
+</section>
+
+
+<!-- ===================== METHOD ===================== -->
+<section id="method">
+  <div class="wrap">
+    <div class="eyebrow"><span class="rule"></span>Method</div>
+    <h2 class="section-title">Video-to-video translation, then classical geometry</h2>
+    <div class="media-block" style="margin-top:26px;">
+      <img src="figures/method.png" alt="ProxyPose method diagram">
+    </div>
+    <p class="prose caption" style="margin-top:18px; font-size:13px; line-height:1.7;">
+      <b style="color:var(--text); font-family:var(--font-body);">Overview of ProxyPose.</b>
+      <b style="color:var(--text); font-family:var(--font-body);">(a)</b> The method takes as input a monocular
+      RGB video and a user-selected query point, both encoded into the latent space of a variational autoencoder.
+      During training, first-frame proxy tokens receive reduced noise for conditioning, subsequent proxy tokens
+      are corrupted with full Gaussian noise, and source video tokens remain noise-free. The source and proxy
+      token streams are concatenated along the token dimension and processed by a LoRA-finetuned video generative
+      model to synthesize a temporally consistent proxy video.
+      <b style="color:var(--text); font-family:var(--font-body);">(b)</b> The generated proxy video is tracked
+      using learning-free geometric methods—contour fitting and Perspective-n-Point (PnP) optimization—to recover
+      the 6-DoF pose of the queried object.
+    </p>
   </div>
 </section>
 
