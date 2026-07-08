@@ -188,6 +188,19 @@
       gap: 20px;
     }
 
+    .section-title {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .section-title .pub-note {
+      font-size: 0.55em;
+      font-weight: 400;
+      font-style: italic;
+      color: #666;
+    }
+
     .pub-thumb {
       width: 100px;
       height: 100px;
@@ -381,9 +394,58 @@
     </section>
 
     <section id="publications">
-      <h2>Publications</h2>
+      <h2 class="section-title">
+        Publications
+        <span class="pub-note">(* denotes equal contribution)</span>
+      </h2>
     
       <div class="list">
+
+        <div class="card pub">
+          <div class="pub-entry">
+        
+            <img
+              class="pub-thumb"
+              src="img/pubs/proxypose.png"
+              alt="ProxyPose teaser"
+            >
+        
+            <div class="pub-content">
+        
+              <div class="title">
+                ProxyPose: 6-DoF Pose Tracking via Video-to-Video Translation
+              </div>
+        
+              <div class="meta">
+                <strong>Ruihang Zhang</strong><sup>*</sup>,
+                Felix Taubner<sup>*</sup>,
+                Pooja Ravi,
+                Kiriakos N. Kutulakos,
+                David B. Lindell
+              </div>
+        
+              <div class="meta">
+                <em>arXiv, 2026</em>
+              </div>
+        
+              <div class="badges">
+                <a class="badge" href="https://ruihangzhang97.github.io/proxypose/" target="_blank">
+                  Project Page
+                </a>
+
+                <a class="badge" href="https://arxiv.org/abs/2607.06555" target="_blank">
+                  arXiv
+                </a>
+        
+                <a class="badge" href="https://github.com/ruihangzhang97/proxypose" target="_blank">
+                  Github
+                </a>
+              </div>
+        
+            </div>
+        
+          </div>
+        </div>
     
         <div class="card pub">
           <div class="pub-entry">
@@ -416,6 +478,10 @@
     
                 <a class="badge" href="https://arxiv.org/abs/2510.12785" target="_blank">
                   arXiv
+                </a>
+
+                <a class="badge" href="https://github.com/felixtaubner/mvp4d/" target="_blank">
+                  Github
                 </a>
               </div>
     
@@ -456,6 +522,11 @@
                 <a class="badge" href="https://arxiv.org/abs/2412.12093" target="_blank">
                   arXiv
                 </a>
+                
+                <a class="badge" href="https://github.com/felixtaubner/cap4d/" target="_blank">
+                  Github
+                </a>
+                
     
                 <span class="badge red">
                   Oral Presentation
