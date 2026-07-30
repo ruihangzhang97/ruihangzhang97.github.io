@@ -239,6 +239,11 @@
   .limit-card video{ width:100%; }
   .limit-caption{ font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); padding: 10px 12px; border-top: 1px solid var(--line); }
 
+  /* ---------- Acknowledgements ---------- */
+  .ack-block{ margin-top: 12px; }
+  .ack-block a{ color: var(--text); border-bottom: 1px solid var(--text-faint); }
+  .ack-block a:hover{ border-color: var(--axis-z); }
+
   /* ---------- Footer ---------- */
   footer{ border-top: 1px solid var(--line); padding: 36px 0; }
   footer .wrap{ display:flex; justify-content: space-between; align-items:center; flex-wrap:wrap; gap: 12px; }
@@ -291,6 +296,7 @@
       <a href="#benchmarks">Benchmarks</a>
       <a href="#limitations">Limitations</a>
       <a href="#citation">Citation</a>
+      <a href="#acknowledgements">Acknowledgements</a>
     </div>
     <div class="nav-actions">
       <a href="https://arxiv.org/abs/2607.06555">arXiv</a>
@@ -562,6 +568,20 @@
   year={2026}
 }</pre>
     </div>
+  </div>
+</section>
+
+<!-- ===================== ACKNOWLEDGEMENTS ===================== -->
+<section id="acknowledgements">
+  <div class="wrap">
+    <div class="eyebrow"><span class="rule"></span>Acknowledgements</div>
+    <p class="prose ack-block" style="margin-top:12px;">
+      We thank <a href="https://haojunqiu.github.io/">Haojun Qiu</a> and
+      <a href="https://michael-neumayr.com/">Michael Neumayr</a> for helpful discussions and
+      feedback throughout this project, and for their assistance with the open-source code release.
+      Follow the <a href="https://compimaging.dgp.toronto.edu/">Toronto Computational Imaging Group</a>
+      for more research updates.
+    </p>
   </div>
 </section>
 
