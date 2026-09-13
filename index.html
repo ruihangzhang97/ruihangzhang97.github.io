@@ -15,6 +15,7 @@
   <title>Ruihang Zhang</title>
   <meta name="description" content="Ruihang Zhang, CS PhD student at the University of Toronto. Research in controllable generative models and world models for robotics." />
   <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css">
 
   <style>
     :root{
@@ -95,19 +96,17 @@
     }
 
     .actions{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
-    .iconbar{ display:flex; gap:10px; align-items:center; }
+    .iconbar{ display:flex; gap:2px; align-items:center; }
     .iconbtn{
       display:inline-flex;
       width:40px;
       height:40px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:var(--card);
       align-items:center;
       justify-content:center;
     }
     .iconbtn:hover{ filter: brightness(1.05); text-decoration:none; }
     .icon{ width:22px; height:22px; display:block; }
+    .icon-font{ font-size:22px; line-height:1; color:var(--accent); }
 
     section{ padding: 15px 0; border-top:none; }
     section h2{ margin:0 0 10px; font-size:20px; }
@@ -130,7 +129,7 @@
     .badge.red{ background:#fee2e2; color:#b91c1c; }
     .news-item{ display:flex; gap:10px; align-items:flex-start; }
     .news-item .date{ font-weight:700; white-space:nowrap; }
-    .socials{ display:flex; justify-content:center; gap:12px; margin-top: 8px; }
+    .socials{ display:flex; justify-content:center; gap:2px; margin-top: 8px; }
 
     .research-grid{
       display:grid;
@@ -273,10 +272,10 @@
               <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Zm2-.5 7 5 7-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
             </a>
             <a class="iconbtn" id="icon-scholar" href="#" title="Google Scholar" aria-label="Google Scholar">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Zm-7 9v4a7 7 0 0 0 14 0v-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <i class="ai ai-google-scholar icon-font" aria-hidden="true"></i>
             </a>
-            <a class="iconbtn" id="footer-twitter" href="#" title="X" aria-label="X">
-              <img class="icon" src="https://cdn.simpleicons.org/x/2563EB" alt="X"/>
+            <a class="iconbtn" id="footer-twitter" href="#" title="Twitter" aria-label="Twitter">
+              <svg class="icon" viewBox="0 0 512 512" fill="#2563EB" aria-hidden="true"><path d="M459.4 151.7c.325 4.548 .325 9.097 .325 13.645 0 138.72 -105.6 298.6 -298.6 298.6 -59.45 0 -114.68 -17.22 -161.14 -47.11 8.447 .974 16.56 1.299 25.34 1.299 49.06 0 94.19 -16.55 130.3 -44.88 -46.13 -.975 -84.79 -31.19 -98.11 -72.77 6.498 .974 12.99 1.624 19.82 1.624 9.447 0 18.89 -1.3 27.68 -3.573 -48.09 -9.746 -84.14 -51.98 -84.14 -102.9v-1.299c13.97 7.797 30.21 12.67 47.44 13.32 -28.34 -18.89 -46.88 -51.33 -46.88 -88.03 0 -19.54 5.197 -37.45 14.32 -53.05 51.65 63.67 129.3 105.3 216.4 109.8 -1.624 -7.797 -2.599 -15.92 -2.599 -24.04 0 -57.83 46.88 -104.9 104.9 -104.9 30.21 0 57.5 12.67 76.71 33.02 23.72 -4.548 46.55 -13.32 66.75 -25.34 -7.797 24.37 -24.37 44.88 -46.13 57.83 21.12 -2.273 41.63 -8.122 60.53 -16.24 -14.32 20.86 -32.24 39.43 -52.75 54.42z"/></svg>
             </a>
             <a class="iconbtn" id="icon-linkedin" href="#" title="LinkedIn" aria-label="LinkedIn">
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#2563EB" viewBox="0 0 16 16">
@@ -621,10 +620,10 @@
             <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Zm2-.5 7 5 7-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           </a>
           <a class="iconbtn" id="footer-scholar" href="#" title="Google Scholar" aria-label="Google Scholar">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Zm-7 9v4a7 7 0 0 0 14 0v-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <i class="ai ai-google-scholar icon-font" aria-hidden="true"></i>
           </a>
-          <a class="iconbtn" id="icon-twitter" href="#" title="X" aria-label="X">
-            <img class="icon" src="https://cdn.simpleicons.org/x/2563EB" alt="X"/>
+          <a class="iconbtn" id="icon-twitter" href="#" title="Twitter" aria-label="Twitter">
+            <svg class="icon" viewBox="0 0 512 512" fill="#2563EB" aria-hidden="true"><path d="M459.4 151.7c.325 4.548 .325 9.097 .325 13.645 0 138.72 -105.6 298.6 -298.6 298.6 -59.45 0 -114.68 -17.22 -161.14 -47.11 8.447 .974 16.56 1.299 25.34 1.299 49.06 0 94.19 -16.55 130.3 -44.88 -46.13 -.975 -84.79 -31.19 -98.11 -72.77 6.498 .974 12.99 1.624 19.82 1.624 9.447 0 18.89 -1.3 27.68 -3.573 -48.09 -9.746 -84.14 -51.98 -84.14 -102.9v-1.299c13.97 7.797 30.21 12.67 47.44 13.32 -28.34 -18.89 -46.88 -51.33 -46.88 -88.03 0 -19.54 5.197 -37.45 14.32 -53.05 51.65 63.67 129.3 105.3 216.4 109.8 -1.624 -7.797 -2.599 -15.92 -2.599 -24.04 0 -57.83 46.88 -104.9 104.9 -104.9 30.21 0 57.5 12.67 76.71 33.02 23.72 -4.548 46.55 -13.32 66.75 -25.34 -7.797 24.37 -24.37 44.88 -46.13 57.83 21.12 -2.273 41.63 -8.122 60.53 -16.24 -14.32 20.86 -32.24 39.43 -52.75 54.42z"/></svg>
           </a>
           <a class="iconbtn" id="footer-linkedin" href="#" title="LinkedIn" aria-label="LinkedIn">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#2563EB" viewBox="0 0 16 16">
