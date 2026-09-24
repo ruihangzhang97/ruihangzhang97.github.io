@@ -119,6 +119,12 @@
   .authors a:hover{ border-color: var(--axis-z); }
   .affils{ font-family: var(--font-mono); font-size: 12.5px; color: var(--text-faint); margin-bottom: 24px; }
 
+  .venue-badge{
+    font-family: var(--font-mono); font-size: 11px; letter-spacing:.04em;
+    color: var(--axis-y); border:1px solid var(--axis-y); border-radius:999px;
+    padding:2px 9px; text-transform:none;
+  }
+
   .tldr{
     font-size: 15px; color: var(--text);
     border-left: 2px solid var(--axis-y);
@@ -309,7 +315,7 @@
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow"><span class="rule"></span>6-DoF Pose Tracking</div>
+      <div class="eyebrow"><span class="rule"></span>6-DoF Pose Tracking<span class="venue-badge">NeurIPS 2026</span></div>
       <h1>ProxyPose: 6-DoF Pose Tracking<br>via Video&#8209;to&#8209;Video Translation</h1>
 
       <div class="authors">
@@ -561,10 +567,10 @@
 
     <div class="cite-block">
       <button class="cite-copy" id="cite-copy-btn" onclick="copyCitation()">Copy</button>
-      <pre id="cite-text">@article{zhang2026proxypose,
+      <pre id="cite-text">@inproceedings{zhang2026proxypose,
   title={ProxyPose: 6-DoF Pose Tracking via Video-to-Video Translation},
   author={Ruihang Zhang and Felix Taubner and Pooja Ravi and Kiriakos N. Kutulakos and David B. Lindell},
-  journal={arXiv preprint arXiv:2607.06555},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
   year={2026}
 }</pre>
     </div>
